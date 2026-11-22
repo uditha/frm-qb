@@ -31,10 +31,1260 @@
     {
       "id": "intro-derivatives",
       "title": "Introduction to Derivatives",
-      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
-      "topics": [],
+      "summary": "Chapter 4 practice. How forwards, futures, and options are used to hedge, speculate, and arbitrage.",
+      "topics": [
+        {
+          "id": "deriv",
+          "title": "What a derivative is"
+        },
+        {
+          "id": "lin",
+          "title": "Linear and non-linear payoffs"
+        },
+        {
+          "id": "mkt",
+          "title": "Exchange and OTC markets"
+        },
+        {
+          "id": "size",
+          "title": "Market size"
+        },
+        {
+          "id": "fwd",
+          "title": "Forward contracts"
+        },
+        {
+          "id": "fut",
+          "title": "Futures contracts"
+        },
+        {
+          "id": "opt",
+          "title": "Option contracts"
+        },
+        {
+          "id": "pay",
+          "title": "Option payoffs"
+        },
+        {
+          "id": "hedge",
+          "title": "Hedging"
+        },
+        {
+          "id": "spec",
+          "title": "Speculation"
+        },
+        {
+          "id": "arb",
+          "title": "Arbitrage"
+        },
+        {
+          "id": "risk",
+          "title": "Risks of using derivatives"
+        }
+      ],
       "revision": [],
-      "questions": []
+      "questions": [
+        {
+          "id": "id-deriv-01",
+          "topic": "deriv",
+          "prompt": "Which statement best defines a derivative?",
+          "choices": [
+            "A contract whose value depends on one or more underlying variables",
+            "A security whose value is fixed at issue and never changes",
+            "A loan whose interest is linked to the borrower's credit score",
+            "An exchange-listed share that pays a variable dividend"
+          ],
+          "answer": 0,
+          "explanation": "A derivative's value derives from underlyings such as equity prices, exchange rates or interest rates. The other choices describe instruments whose value is not driven by a separate underlying variable.",
+          "learningPoint": "Derivative = value derived from an underlying.",
+          "reference": "Intro"
+        },
+        {
+          "id": "id-deriv-02",
+          "topic": "deriv",
+          "prompt": "Besides the value of the underlying, which other variables can also play an important role in valuing derivatives?",
+          "choices": [
+            "Interest rates and volatilities",
+            "Accounting standards and tax rates",
+            "Trading volume and the number of dealers",
+            "Credit ratings of the exchange's members"
+          ],
+          "answer": 0,
+          "explanation": "The underlying is central to valuing both linear and non-linear derivatives, but interest rates and volatilities can also matter. The other choices are not identified as valuation drivers.",
+          "learningPoint": "Value drivers: underlying first, then interest rates and volatility.",
+          "reference": "Intro"
+        },
+        {
+          "id": "id-deriv-03",
+          "topic": "deriv",
+          "prompt": "A company can abandon a new project if it goes badly or expand it if it goes well. This flexibility is best described as:",
+          "choices": [
+            "A real option",
+            "An embedded forward",
+            "A credit default swap",
+            "An interest rate swap"
+          ],
+          "answer": 0,
+          "explanation": "Options embedded in capital investments involve physical assets rather than financial assets, so they are called real options. The other choices are financial contracts, not flexibility in a physical project.",
+          "learningPoint": "Abandon/expand flexibility in a project = real option.",
+          "reference": "Intro"
+        },
+        {
+          "id": "id-deriv-04",
+          "topic": "deriv",
+          "prompt": "Which of the following is NOT a typical way derivatives are used?",
+          "choices": [
+            "Guaranteeing that a company's share price will rise",
+            "Giving bond issuers the right to repay bonds early",
+            "Giving employees options to buy company shares",
+            "Managing foreign exchange and commodity price risk"
+          ],
+          "answer": 0,
+          "explanation": "Derivatives manage risk, are embedded in bonds (call, put and conversion features) and appear in employee compensation. No derivative can guarantee a rising share price.",
+          "learningPoint": "Uses: risk management, embedded bond features, employee options, real options, mortgages.",
+          "reference": "Intro"
+        },
+        {
+          "id": "id-deriv-05",
+          "topic": "deriv",
+          "prompt": "A trader with no existing exposure to oil enters a long oil forward. A refiner that must buy oil next quarter enters the identical contract. How are the two trades best classified?",
+          "choices": [
+            "The trader is speculating; the refiner is hedging",
+            "Both are hedging because the contract is identical",
+            "Both are speculating because forwards are leveraged",
+            "The trader is hedging; the refiner is speculating"
+          ],
+          "answer": 0,
+          "explanation": "The same trade reduces exposure for someone who already has it (hedging) but creates exposure for someone who has none (speculation). The contract itself does not decide the label.",
+          "learningPoint": "Same trade: hedge if it reduces existing exposure, speculation if there is none.",
+          "reference": "Intro"
+        },
+        {
+          "id": "id-deriv-06",
+          "topic": "deriv",
+          "prompt": "In the run-up to the 2007-2008 credit crisis, which sequence best describes the role of mortgage-linked derivatives?",
+          "choices": [
+            "Relaxed lending, subprime mortgages bundled into derivatives, defaults rise, derivative losses",
+            "Tighter lending, prime mortgages hedged with futures, defaults fall, derivative gains",
+            "Rate cuts, mortgages converted into equity options, house prices rise, no losses",
+            "Relaxed lending, mortgages held on balance sheets, no derivatives involved, bank runs"
+          ],
+          "answer": 0,
+          "explanation": "US banks relaxed lending standards and created subprime mortgages. They then bundled them into complex derivatives tied to default losses. When house prices fell and defaults rose, those derivatives suffered losses and investors fled risky debt.",
+          "learningPoint": "Crisis chain: subprime lending, then bundling into derivatives, then defaults, then losses.",
+          "reference": "Intro"
+        },
+        {
+          "id": "id-deriv-07",
+          "topic": "deriv",
+          "prompt": "Which is NOT a benefit of derivatives to society?",
+          "choices": [
+            "They remove the need for regulators to monitor speculation",
+            "Corporate treasurers can manage exchange rate and interest rate risk",
+            "Fund managers can diversify their exposures",
+            "A ski resort can survive a single unusually warm winter"
+          ],
+          "answer": 0,
+          "explanation": "Derivatives transfer risk in ways that can benefit both sides. Regulators still face the challenge of keeping those benefits while discouraging extreme speculation and needless complexity.",
+          "learningPoint": "Regulators' challenge: keep the benefits, curb extreme speculation.",
+          "reference": "Intro"
+        },
+        {
+          "id": "id-lin-08",
+          "topic": "lin",
+          "prompt": "Which pair correctly classifies a forward contract and an option?",
+          "choices": [
+            "Forward: linear; option: non-linear",
+            "Forward: non-linear; option: linear",
+            "Both are linear derivatives",
+            "Both are non-linear derivatives"
+          ],
+          "answer": 0,
+          "explanation": "A forward's payoff (S_T − K or K − S_T) is a straight-line function of the underlying. An option's payoff bends at the strike price because the holder can choose not to exercise.",
+          "learningPoint": "Forward/futures = linear. Options = non-linear.",
+          "reference": "Intro, §4.2, §4.4"
+        },
+        {
+          "id": "id-lin-09",
+          "topic": "lin",
+          "prompt": "Why is an option's payoff non-linear in the underlying price?",
+          "choices": [
+            "The holder exercises only when it is favourable, so the payoff is floored",
+            "The option premium is paid at the outset rather than at maturity",
+            "Options trade on exchanges rather than over the counter",
+            "The strike price changes as the underlying price changes"
+          ],
+          "answer": 0,
+          "explanation": "Because the holder has a right, not an obligation, the payoff is max(S_T − K, 0) or max(K − S_T, 0), which bends at K. Paying a premium, the trading venue and the strike do not create the kink.",
+          "learningPoint": "The kink at K comes from the right to walk away.",
+          "reference": "§4.4"
+        },
+        {
+          "id": "id-lin-10",
+          "topic": "lin",
+          "prompt": "Which TWO consequences follow from options having non-linear payoffs?",
+          "choices": [
+            "Option value is non-linear in the underlying and depends on its volatility",
+            "Option value is linear in the underlying and independent of volatility",
+            "Options cost nothing to enter and have unlimited downside for buyers",
+            "Options must be exercised early and settle only in cash"
+          ],
+          "answer": 0,
+          "explanation": "Non-linear payoffs mean (1) the option's value is a non-linear function of the underlying and (2) the option's value depends on the volatility of the underlying.",
+          "learningPoint": "Non-linear means volatility matters for option value.",
+          "reference": "§4.4"
+        },
+        {
+          "id": "id-lin-11",
+          "topic": "lin",
+          "prompt": "The underlying of a long forward rises by USD 3 at maturity. How does the payoff change compared with an unchanged price?",
+          "choices": [
+            "It rises by exactly USD 3 per unit",
+            "It rises by USD 3 only if the price is above K",
+            "It is unchanged until the price passes K",
+            "It rises by less than USD 3 because of the premium"
+          ],
+          "answer": 0,
+          "explanation": "A long forward's payoff is S_T − K, so every USD 1 change in S_T changes the payoff by USD 1, wherever S_T is relative to K. The conditional answers describe an option, and a forward has no premium.",
+          "learningPoint": "Linear: payoff moves one for one with the underlying everywhere.",
+          "reference": "§4.2"
+        },
+        {
+          "id": "id-mkt-12",
+          "topic": "mkt",
+          "prompt": "What is the key difference between an exchange and an over-the-counter market?",
+          "choices": [
+            "Exchanges trade standardized contracts; OTC parties negotiate contracts directly",
+            "Exchanges trade only options; OTC markets trade only forwards",
+            "Exchanges are unregulated; OTC markets are fully regulated",
+            "Exchanges allow any terms; OTC markets require standard terms"
+          ],
+          "answer": 0,
+          "explanation": "An exchange lists standardized contracts it has defined. In the OTC market, participants contact each other directly (or through a broker) and can trade any contract they like.",
+          "learningPoint": "Exchange = standard. OTC = custom.",
+          "reference": "§4.1"
+        },
+        {
+          "id": "id-mkt-13",
+          "topic": "mkt",
+          "prompt": "A treasurer needs a currency hedge maturing on an unusual date for an odd notional amount. What is the main advantage of the OTC market for this?",
+          "choices": [
+            "The maturity and amount can be negotiated to fit exactly",
+            "There is no credit risk because a clearing house guarantees it",
+            "Prices are always more transparent than on exchanges",
+            "The contract can be resold to anyone at any time"
+          ],
+          "answer": 0,
+          "explanation": "OTC contracts need not follow exchange-set standard features, so the date, amount and strike can be tailored. The other choices describe exchange features or are not true of OTC trades.",
+          "learningPoint": "OTC advantage = flexibility to tailor terms.",
+          "reference": "§4.1, Q4.12"
+        },
+        {
+          "id": "id-mkt-14",
+          "topic": "mkt",
+          "prompt": "Which statement about participants in the OTC market is correct?",
+          "choices": [
+            "Dealers quote bid and ask prices and offset risk in the interdealer market",
+            "End users mainly quote two-sided prices to other end users",
+            "Interdealer brokers trade with corporate end users on their own account",
+            "Dealers never quote one-sided prices for structured products"
+          ],
+          "answer": 0,
+          "explanation": "End users (corporations, fund managers) manage risk. Dealers (large financial institutions) quote bid and ask prices, give one-sided quotes for highly structured deals, and offset risk with other dealers.",
+          "learningPoint": "End users manage risk; dealers make markets; brokers connect dealers.",
+          "reference": "§4.1"
+        },
+        {
+          "id": "id-mkt-15",
+          "topic": "mkt",
+          "prompt": "Why might a dealer prefer to use an interdealer broker when offloading a large exposure?",
+          "choices": [
+            "To avoid revealing its trade so others cannot trade ahead of it",
+            "To avoid paying any bid-ask spread on the transaction",
+            "To have the broker guarantee the counterparty's performance",
+            "To move the trade from the OTC market onto an exchange"
+          ],
+          "answer": 0,
+          "explanation": "If others know a dealer must offload a large exposure, they may trade ahead and move the price. A good broker feeds the trade in anonymously and does not reveal the client's name until the trade is final.",
+          "learningPoint": "Interdealer broker = anonymity, protecting against front-running.",
+          "reference": "§4.1, footnote 4"
+        },
+        {
+          "id": "id-mkt-16",
+          "topic": "mkt",
+          "prompt": "Which statement about derivatives exchange history is correct?",
+          "choices": [
+            "The CBOT was established in 1848 to let farmers trade with merchants",
+            "The CBOE was founded in 1848 to trade wheat futures",
+            "The CBOT launched exchange-traded put options before calls",
+            "Futures exchanges first appeared after the 1973 option model"
+          ],
+          "answer": 0,
+          "explanation": "The CBOT was set up in 1848, and 'to-arrive' contracts (forerunners of futures) soon followed. The CBOE was launched in 1973 and traded calls before puts, which arrived in 1977. Trading later moved from open outcry to electronic and algorithmic systems (the 2010 flash crash, about −7% in 15 minutes, was partly algorithm-driven).",
+          "learningPoint": "CBOT 1848; CBOE 1973; puts on the CBOE from 1977.",
+          "reference": "§4.1, footnote 1"
+        },
+        {
+          "id": "id-mkt-17",
+          "topic": "mkt",
+          "prompt": "Which event in 1973 transformed options trading alongside the launch of the CBOE?",
+          "choices": [
+            "Publication of the Black-Scholes-Merton option pricing model",
+            "Introduction of mandatory central clearing for OTC trades",
+            "The first electronic matching of buyers and sellers",
+            "The Bank for International Settlements' first derivatives survey"
+          ],
+          "answer": 0,
+          "explanation": "The Black-Scholes-Merton model was published in 1973, and special-purpose calculators soon followed. Central clearing mandates came after 2008, and BIS data collection began in 1998.",
+          "learningPoint": "1973: CBOE launch + Black-Scholes-Merton model.",
+          "reference": "§4.1"
+        },
+        {
+          "id": "id-mkt-18",
+          "topic": "mkt",
+          "prompt": "Which of the following was NOT a post-2008 change to OTC derivatives markets?",
+          "choices": [
+            "Banning dealers from trading with end users",
+            "Standardized dealer trades on swap execution facilities",
+            "Central counterparties for standardized dealer trades",
+            "Reporting all trades to a central registry"
+          ],
+          "answer": 0,
+          "explanation": "The three changes were trading on swap execution facilities (in the US), using central counterparties for standardized interdealer trades, and reporting all trades to a central registry. Dealers were not banned from trading with end users. Before the crisis the OTC market was largely unregulated, and trades were private with no reporting.",
+          "learningPoint": "Post-crisis OTC rules: SEFs, CCPs, trade reporting.",
+          "reference": "§4.1"
+        },
+        {
+          "id": "id-mkt-19",
+          "topic": "mkt",
+          "prompt": "A swap execution facility is best described as:",
+          "choices": [
+            "An exchange-like platform where participants post bid and ask prices",
+            "A central counterparty that guarantees both sides of a trade",
+            "A registry that records all OTC trades for regulators",
+            "A broker that anonymously matches two dealers by phone"
+          ],
+          "answer": 0,
+          "explanation": "In the US, standardized OTC trades between dealers must, where possible, trade on swap execution facilities. These are exchange-like platforms where bid and ask prices are posted. CCPs and registries are separate requirements.",
+          "learningPoint": "SEF = trading platform; CCP = guarantor; registry = reporting.",
+          "reference": "§4.1"
+        },
+        {
+          "id": "id-mkt-20",
+          "topic": "mkt",
+          "prompt": "Which instruments are traded on exchanges?",
+          "choices": [
+            "Futures and options",
+            "Forwards and futures",
+            "Forwards only",
+            "Forwards and options"
+          ],
+          "answer": 0,
+          "explanation": "Futures and options trade on exchanges. Forwards are OTC contracts. Options also trade OTC, but forwards do not trade on exchanges.",
+          "learningPoint": "Forwards = OTC only; futures = exchange; options = both.",
+          "reference": "Q4.5, §4.2–4.4"
+        },
+        {
+          "id": "id-mkt-21",
+          "topic": "mkt",
+          "prompt": "Which statement about how trading on derivatives exchanges is done today is most accurate?",
+          "choices": [
+            "Most trading is electronic, sometimes started by algorithms with no human input",
+            "Open outcry on the trading floor remains the main way trades are agreed",
+            "Trades are mainly arranged by phone between end users and dealers",
+            "Every exchange trade must first be approved by a central registry"
+          ],
+          "answer": 0,
+          "explanation": "Exchanges traditionally used open outcry: traders on the floor shouting and using hand signals. Most trading is now electronic, with computers matching buyers and sellers, and some is started by algorithms. The 2010 flash crash (about −7% in 15 minutes) was partly caused by an algorithm.",
+          "learningPoint": "Open outcry → electronic and algorithmic trading; flash crash 2010.",
+          "reference": "§4.1, footnote 3"
+        },
+        {
+          "id": "id-size-22",
+          "topic": "size",
+          "prompt": "In June 2017, the OTC market was closest to how many times the size of the exchange-traded market?",
+          "choices": [
+            "7",
+            "2",
+            "4",
+            "16"
+          ],
+          "answer": 0,
+          "explanation": "531.9 ÷ 81.0 ≈ 6.6, which is closest to 7. Do not confuse this with growth factors: OTC grew about 7.4 times, and exchange trading about 6 times, between 1998 and 2017.",
+          "learningPoint": "OTC ≈ 7 × exchange (2017). Ratio ≠ growth factor.",
+          "reference": "§4.1, Table 4.1, Q4.4"
+        },
+        {
+          "id": "id-size-23",
+          "topic": "size",
+          "prompt": "Between June 1998 and June 2017, the exchange-traded derivatives market grew by a factor of approximately:",
+          "choices": [
+            "6",
+            "7.4",
+            "13",
+            "2"
+          ],
+          "answer": 0,
+          "explanation": "81.0 ÷ 13.3 ≈ 6.1. The OTC market grew by 531.9 ÷ 72.1 ≈ 7.4.",
+          "learningPoint": "Growth 1998–2017: exchange ≈ 6×, OTC ≈ 7.4×.",
+          "reference": "§4.1, Table 4.1"
+        },
+        {
+          "id": "id-size-24",
+          "topic": "size",
+          "prompt": "World GDP in 2017 was about USD 75 trillion. Which comparison is correct?",
+          "choices": [
+            "Exchange-traded underlying ≈ world GDP; OTC ≈ 7 × world GDP",
+            "Exchange-traded underlying ≈ 7 × world GDP; OTC ≈ world GDP",
+            "Both markets were each about half of world GDP",
+            "OTC ≈ world GDP; exchange-traded ≈ one-tenth of it"
+          ],
+          "answer": 0,
+          "explanation": "Exchange-traded underlying of USD 81 trillion is roughly world GDP. The OTC principal of USD 531.9 trillion is about 7 × 75.",
+          "learningPoint": "Exchange ≈ 1 × GDP; OTC ≈ 7 × GDP.",
+          "reference": "§4.1"
+        },
+        {
+          "id": "id-size-25",
+          "topic": "size",
+          "prompt": "An exchange-traded option gives the right to buy 100 shares, currently worth USD 40 each, for USD 45 each. How would it be recorded in BIS size statistics?",
+          "choices": [
+            "USD 4,000",
+            "USD 4,500",
+            "USD 500",
+            "USD 0"
+          ],
+          "answer": 0,
+          "explanation": "Exchange-traded statistics record the value of the underlying assets: 100 × USD 40 = USD 4,000. The strike price and the option premium are not what is measured.",
+          "learningPoint": "Exchange size = current value of the underlying, not the strike or premium.",
+          "reference": "§4.1"
+        },
+        {
+          "id": "id-size-26",
+          "topic": "size",
+          "prompt": "An OTC forward to buy GBP 1 million at USD 1.2500 is worth only a few thousand dollars. In BIS statistics it is recorded at:",
+          "choices": [
+            "The current value of GBP 1 million",
+            "The few thousand dollars the forward is worth",
+            "Zero, because forwards cost nothing to enter",
+            "The bid-ask spread earned by the dealer"
+          ],
+          "answer": 0,
+          "explanation": "OTC statistics measure the principal underlying outstanding trades, not the contract's value. So size figures overstate the economic value of the trades.",
+          "learningPoint": "Size statistics ≠ value of the transactions.",
+          "reference": "§4.1"
+        },
+        {
+          "id": "id-size-27",
+          "topic": "size",
+          "prompt": "The decline in the measured size of the OTC market between 2014 and 2017 is mainly attributed to:",
+          "choices": [
+            "Compression of trades between market participants",
+            "Migration of all OTC trades onto exchanges",
+            "A collapse in demand for interest rate hedges",
+            "Default of several large derivatives dealers"
+          ],
+          "answer": 0,
+          "explanation": "Compression restructures trades among two or more participants so that the underlying principal (and the capital required) falls. Because BIS measures principal, measured size drops.",
+          "learningPoint": "Compression cuts principal, so measured OTC size falls.",
+          "reference": "§4.1, Q4.16"
+        },
+        {
+          "id": "id-fwd-28",
+          "topic": "fwd",
+          "prompt": "Which statement about a forward contract is correct?",
+          "choices": [
+            "It is an OTC agreement to trade an asset at a set price on a future date",
+            "It is an exchange contract with daily price limits set by the exchange",
+            "It gives the buyer the right but not the obligation to trade",
+            "It settles almost immediately, usually within one or two days"
+          ],
+          "answer": 0,
+          "explanation": "A forward is an OTC contract binding both sides to buy or sell at a predetermined price in the future. Immediate settlement describes a spot contract, and a right without obligation describes an option.",
+          "learningPoint": "Forward = OTC + obligation + future date.",
+          "reference": "§4.2"
+        },
+        {
+          "id": "id-fwd-29",
+          "topic": "fwd",
+          "prompt": "How much does it cost to enter a forward contract?",
+          "choices": [
+            "Nothing, apart from the bid-ask spread",
+            "A premium paid upfront by the buyer",
+            "A premium paid upfront by the seller",
+            "The full forward price paid on day one"
+          ],
+          "answer": 0,
+          "explanation": "Locking in a forward price costs nothing except the bid-ask spread. Options require an upfront premium.",
+          "learningPoint": "Forward: zero cost to enter. Option: pay premium.",
+          "reference": "§4.4, §4.5"
+        },
+        {
+          "id": "id-fwd-30",
+          "topic": "fwd",
+          "prompt": "A spot contract differs from a forward contract because a spot contract:",
+          "choices": [
+            "Settles almost immediately, typically within a day or two",
+            "Is always traded on an exchange",
+            "Gives one side the right but not the obligation to trade",
+            "Fixes the price at the delivery date rather than today"
+          ],
+          "answer": 0,
+          "explanation": "A spot contract is an agreement to buy or sell almost immediately, with settlement taking a day or two. A forward fixes the price today for a future date.",
+          "learningPoint": "Spot = now (T+1/T+2). Forward = later.",
+          "reference": "§4.2, footnote 5"
+        },
+        {
+          "id": "id-fwd-31",
+          "topic": "fwd",
+          "prompt": "A dealer quotes the six-month USD/EUR forward as bid 1.1944, ask 1.1948. A US company that must PAY euros in six months enters a forward with the dealer. Which rate does it lock in?",
+          "choices": [
+            "1.1948, the dealer's ask",
+            "1.1944, the dealer's bid",
+            "1.1946, the mid-price",
+            "1.1771, the spot ask"
+          ],
+          "answer": 0,
+          "explanation": "The company buys euros, so the dealer sells and the company pays the ask, 1.1948. A company receiving euros would sell at the bid, 1.1944.",
+          "learningPoint": "You buy at the dealer's ask; you sell at the dealer's bid.",
+          "reference": "§4.2, Table 4.2"
+        },
+        {
+          "id": "id-fwd-32",
+          "topic": "fwd",
+          "prompt": "A US exporter will RECEIVE euros in three months. The dealer quotes the three-month forward as bid 1.1858, ask 1.1862. Which hedge and rate apply?",
+          "choices": [
+            "Short forward at 1.1858",
+            "Long forward at 1.1862",
+            "Short forward at 1.1862",
+            "Long forward at 1.1858"
+          ],
+          "answer": 0,
+          "explanation": "Receiving euros means the exporter will sell them, so it takes a short forward. The dealer buys at its bid, 1.1858.",
+          "learningPoint": "Receive foreign currency → sell forward at the bid.",
+          "reference": "§4.2, Table 4.2"
+        },
+        {
+          "id": "id-fwd-33",
+          "topic": "fwd",
+          "prompt": "Which statement about K, the delivery price in a forward contract, is correct?",
+          "choices": [
+            "It is the forward price when the contract was entered and stays fixed",
+            "It is reset each day to the current forward price",
+            "It always equals the spot price at maturity",
+            "It is the premium the buyer pays to enter"
+          ],
+          "answer": 0,
+          "explanation": "K is the forward price at the time the contract is entered. It is not necessarily the forward price for that maturity at later dates, which can move.",
+          "learningPoint": "K is fixed at inception; the market forward price keeps moving.",
+          "reference": "§4.2, footnote 6"
+        },
+        {
+          "id": "id-fwd-34",
+          "topic": "fwd",
+          "prompt": "Company A is long a forward to buy EUR 1 million at USD 1.1948. At maturity the rate is USD 1.2500. What is Company A's payoff?",
+          "choices": [
+            "+USD 55,200",
+            "−USD 55,200",
+            "+USD 55,600",
+            "−USD 55,600"
+          ],
+          "answer": 0,
+          "explanation": "Long payoff = 1,000,000 × (1.2500 − 1.1948) = +USD 55,200. A gain of 55,600 would need a forward price of 1.1944. Company B, short at 1.1944, would lose 1,000,000 × (1.1944 − 1.2500) = USD 55,600.",
+          "learningPoint": "Long forward payoff = N × (S_T − K).",
+          "reference": "§4.2"
+        },
+        {
+          "id": "id-fut-35",
+          "topic": "fut",
+          "prompt": "Which feature distinguishes a futures contract from a forward contract?",
+          "choices": [
+            "It trades on an exchange that standardizes terms and limits credit risk",
+            "It gives the holder the right but not the obligation to trade",
+            "Its payoff is a non-linear function of the underlying",
+            "It always requires physical delivery of the asset"
+          ],
+          "answer": 0,
+          "explanation": "Futures provide a similar payoff to forwards but trade on an exchange. The exchange defines the asset and maturity dates and organizes trading so there is very little credit risk.",
+          "learningPoint": "Futures = exchange-traded forward with low credit risk.",
+          "reference": "§4.3"
+        },
+        {
+          "id": "id-fut-36",
+          "topic": "fut",
+          "prompt": "Credit risk in a derivative transaction refers to:",
+          "choices": [
+            "The risk that the agreement will not be honoured",
+            "The risk that the underlying's price will move",
+            "The risk that the option expires out of the money",
+            "The risk that the exchange changes the contract size"
+          ],
+          "answer": 0,
+          "explanation": "Credit risk is the risk that the counterparty does not honour the agreement. The exchange organizes futures trading so this is very small, even when the parties do not know each other.",
+          "learningPoint": "Credit risk = counterparty may not pay.",
+          "reference": "§4.3"
+        },
+        {
+          "id": "id-fut-37",
+          "topic": "fut",
+          "prompt": "Which pairing of contract type and typical underlyings is most accurate?",
+          "choices": [
+            "Forwards: mainly FX and rates; futures: a much wider range",
+            "Forwards: mainly commodities; futures: mainly FX",
+            "Forwards: weather and crypto; futures: rates only",
+            "Both forwards and futures: equity indices only"
+          ],
+          "answer": 0,
+          "explanation": "Forwards trade most actively on a few underlyings, such as exchange rates and interest rates. Futures cover a wide range: agricultural products, metals, equity indices, energy, real estate indices, temperatures and cryptocurrencies.",
+          "learningPoint": "Futures cover far more underlyings than forwards.",
+          "reference": "§4.3"
+        },
+        {
+          "id": "id-fut-38",
+          "topic": "fut",
+          "prompt": "A trader enters a short futures contract to sell 100 units at USD 50. At maturity the price is USD 55. What is the trader's gain or loss?",
+          "choices": [
+            "Loss of USD 500",
+            "Gain of USD 500",
+            "Loss of USD 200",
+            "Gain of USD 200"
+          ],
+          "answer": 0,
+          "explanation": "Short payoff = 100 × (50 − 55) = −USD 500. The trader must sell at 50 an asset worth 55. At USD 48 the same trader would gain 100 × (50 − 48) = USD 200.",
+          "learningPoint": "Short futures lose when the price rises.",
+          "reference": "§4.3, Q4.11"
+        },
+        {
+          "id": "id-opt-39",
+          "topic": "opt",
+          "prompt": "The buyer of a put option has:",
+          "choices": [
+            "The right to sell the asset at the strike price",
+            "The obligation to sell the asset at the strike price",
+            "The right to buy the asset at the strike price",
+            "The obligation to buy the asset at the strike price"
+          ],
+          "answer": 0,
+          "explanation": "A long put gives the right, not the obligation, to sell at K. The put writer has the obligation to buy if the buyer exercises.",
+          "learningPoint": "Call = right to buy; put = right to sell.",
+          "reference": "§4.4"
+        },
+        {
+          "id": "id-opt-40",
+          "topic": "opt",
+          "prompt": "What is the main difference between selling a call option and buying a put option?",
+          "choices": [
+            "The call seller must sell if exercised; the put buyer may choose to sell",
+            "Both have the right to sell at the strike price",
+            "Both are obliged to sell when the price falls",
+            "The call seller may buy; the put buyer must buy"
+          ],
+          "answer": 0,
+          "explanation": "A call writer must sell the asset when the price exceeds K (if the holder exercises). A put buyer has the option to sell when the price is below K. Both are bearish-leaning, but only the put buyer has a choice.",
+          "learningPoint": "Sellers of options have obligations; buyers have rights.",
+          "reference": "§4.4, Q4.13"
+        },
+        {
+          "id": "id-opt-41",
+          "topic": "opt",
+          "prompt": "Which statement about European and American options is correct?",
+          "choices": [
+            "European options are exercisable only at expiry; American at any time up to expiry",
+            "American options are exercisable only at expiry; European at any time",
+            "European options trade only in Europe; American only in the US",
+            "Both can be exercised only on the expiration date"
+          ],
+          "answer": 0,
+          "explanation": "The labels describe exercise rights, not geography. Exchange-traded stock options, such as the CBOE options on IBM, are American.",
+          "learningPoint": "European = End only; American = Anytime.",
+          "reference": "§4.4"
+        },
+        {
+          "id": "id-opt-42",
+          "topic": "opt",
+          "prompt": "Holding the expiry date constant, how do call and put premiums change as the strike price increases?",
+          "choices": [
+            "Calls get cheaper; puts get more expensive",
+            "Calls get more expensive; puts get cheaper",
+            "Both calls and puts get cheaper",
+            "Both calls and puts get more expensive"
+          ],
+          "answer": 0,
+          "explanation": "A higher strike makes the right to buy less valuable and the right to sell more valuable. In the IBM tables, Sept calls fall from 9.80 to 2.18 while puts rise from 2.81 to 10.65 as K goes from 140 to 155 (ask prices).",
+          "learningPoint": "Higher K: calls ↓, puts ↑.",
+          "reference": "§4.4, Tables 4.3–4.4"
+        },
+        {
+          "id": "id-opt-43",
+          "topic": "opt",
+          "prompt": "Holding the strike constant, how do option premiums change as time to expiry increases?",
+          "choices": [
+            "Both call and put premiums increase",
+            "Call premiums increase; put premiums decrease",
+            "Both call and put premiums decrease",
+            "Premiums are unaffected by time to expiry"
+          ],
+          "answer": 0,
+          "explanation": "In the IBM quotes, every option is more expensive for a longer maturity (e.g., the 150 call ask is 3.90, 6.05 and 9.25 for Sept, Dec and June).",
+          "learningPoint": "Longer maturity → higher premiums (calls and puts).",
+          "reference": "§4.4, Tables 4.3–4.4"
+        },
+        {
+          "id": "id-opt-44",
+          "topic": "opt",
+          "prompt": "Compared with the underlying stocks, bid-ask spreads on stock options (as a proportion of price) are:",
+          "choices": [
+            "Much higher",
+            "Much lower",
+            "About the same",
+            "Always zero"
+          ],
+          "answer": 0,
+          "explanation": "Bid-ask spreads, especially as a proportion of price, are much higher for stock options than for the stocks themselves. IBM stock was quoted 147.03/147.04, while option spreads were 0.04–0.30.",
+          "learningPoint": "Options have much wider relative bid-ask spreads.",
+          "reference": "§4.4"
+        },
+        {
+          "id": "id-opt-45",
+          "topic": "opt",
+          "prompt": "A trader wants to BUY one September 150 IBM call quoted bid 3.80, ask 3.90. Ignoring discounting, what IBM price at expiry is needed to break even?",
+          "choices": [
+            "USD 153.90",
+            "USD 153.80",
+            "USD 150.00",
+            "USD 146.10"
+          ],
+          "answer": 0,
+          "explanation": "The buyer pays the ask of 3.90, so breakeven = K + premium = 150 + 3.90 = 153.90. Using the bid would be the price for a seller.",
+          "learningPoint": "Long call breakeven = K + premium paid (at the ask).",
+          "reference": "§4.4, Table 4.3"
+        },
+        {
+          "id": "id-opt-46",
+          "topic": "opt",
+          "prompt": "The CBOE IBM options in the quote tables expire on the third Friday of the month. Which statement is also true?",
+          "choices": [
+            "Exchanges now also offer weekly and quarterly expiries",
+            "Stock options may only expire on the 21st of a month",
+            "All exchange options are European because of fixed expiries",
+            "Each stock has only one expiration date at a time"
+          ],
+          "answer": 0,
+          "explanation": "Options trade with several expiration dates. Standard ones are the third Friday of the month (the 21st in the tables is a coincidence), and weeklys and quarterlys expire at other times.",
+          "learningPoint": "Multiple expiries: monthly (3rd Friday), weeklys, quarterlys.",
+          "reference": "§4.4, footnote 7"
+        },
+        {
+          "id": "id-pay-47",
+          "topic": "pay",
+          "prompt": "Which is the payoff to the holder of a long European call at expiry?",
+          "choices": [
+            "max(S_T − K, 0)",
+            "max(K − S_T, 0)",
+            "min(S_T − K, 0)",
+            "−max(S_T − K, 0)"
+          ],
+          "answer": 0,
+          "explanation": "The call holder exercises only if S_T > K, receiving S_T − K; otherwise the payoff is 0. max(K − S_T, 0) is a long put. min(S_T − K, 0) can never be positive, so it cannot be a holder's payoff. −max(S_T − K, 0) is a short call.",
+          "learningPoint": "Long call = max(S_T − K, 0).",
+          "reference": "§4.4"
+        },
+        {
+          "id": "id-pay-48",
+          "topic": "pay",
+          "prompt": "Which is the payoff to a trader who has SOLD a European put?",
+          "choices": [
+            "−max(K − S_T, 0)",
+            "max(K − S_T, 0)",
+            "−max(S_T − K, 0)",
+            "S_T − K"
+          ],
+          "answer": 0,
+          "explanation": "The put writer must buy at K an asset worth S_T when S_T < K, losing K − S_T; otherwise the payoff is 0. So the best case is zero (before the premium). max(K − S_T, 0) is a long put, −max(S_T − K, 0) a short call, and S_T − K a long forward.",
+          "learningPoint": "Short put = −max(K − S_T, 0).",
+          "reference": "§4.4, Q4.7"
+        },
+        {
+          "id": "id-pay-49",
+          "topic": "pay",
+          "prompt": "A long put has strike USD 50. At expiry the stock is USD 42. What is the payoff to the put holder?",
+          "choices": [
+            "USD 8",
+            "USD 0",
+            "−USD 8",
+            "USD 42"
+          ],
+          "answer": 0,
+          "explanation": "Payoff = max(50 − 42, 0) = 8. The holder sells at 50 an asset worth 42.",
+          "learningPoint": "Long put pays K − S_T when S_T < K.",
+          "reference": "§4.4"
+        },
+        {
+          "id": "id-pay-50",
+          "topic": "pay",
+          "prompt": "A long call has strike USD 50. At expiry the stock is USD 45. What is the payoff?",
+          "choices": [
+            "USD 0",
+            "−USD 5",
+            "USD 5",
+            "USD 45"
+          ],
+          "answer": 0,
+          "explanation": "Payoff = max(45 − 50, 0) = 0. The holder simply does not exercise; the payoff is never negative. (The premium paid is a separate loss.)",
+          "learningPoint": "Option payoff is floored at zero; −5 is a trap.",
+          "reference": "§4.4"
+        },
+        {
+          "id": "id-pay-51",
+          "topic": "pay",
+          "prompt": "A trader sold a call with strike USD 50 and received a premium of USD 4. At expiry the stock is USD 58. What is the trader's profit, ignoring discounting?",
+          "choices": [
+            "−USD 4",
+            "−USD 8",
+            "+USD 4",
+            "−USD 12"
+          ],
+          "answer": 0,
+          "explanation": "Payoff = −max(58 − 50, 0) = −8. Adding the premium received: −8 + 4 = −4.",
+          "learningPoint": "Profit (option seller) = premium received + payoff.",
+          "reference": "§4.4"
+        },
+        {
+          "id": "id-pay-52",
+          "topic": "pay",
+          "prompt": "A trader buys a call with strike USD 50 for USD 2 when the stock is USD 49. Ignoring discounting, when does the trader make a profit?",
+          "choices": [
+            "When the stock price at expiry exceeds USD 52",
+            "When the stock price at expiry exceeds USD 50",
+            "When the stock price at expiry exceeds USD 49",
+            "When the stock price at expiry exceeds USD 51"
+          ],
+          "answer": 0,
+          "explanation": "Profit requires max(S_T − 50, 0) > 2, i.e., S_T > 52. Above 50 there is a payoff, but it only covers the premium beyond 52. The current price of 49 is irrelevant.",
+          "learningPoint": "Payoff ≠ profit: subtract the premium.",
+          "reference": "§4.4, Q4.14"
+        },
+        {
+          "id": "id-pay-53",
+          "topic": "pay",
+          "prompt": "A trader sells a put with strike USD 50 for USD 3 when the stock is USD 51. Ignoring discounting, when does the trader make a profit?",
+          "choices": [
+            "When the stock price at expiry is above USD 47",
+            "When the stock price at expiry is below USD 47",
+            "When the stock price at expiry is above USD 53",
+            "When the stock price at expiry is above USD 51"
+          ],
+          "answer": 0,
+          "explanation": "The seller keeps the 3 premium and pays max(50 − S_T, 0). Profit if 50 − S_T < 3, i.e., S_T > 47.",
+          "learningPoint": "Short put breakeven = K − premium.",
+          "reference": "§4.4, Q4.15"
+        },
+        {
+          "id": "id-pay-54",
+          "topic": "pay",
+          "prompt": "A portfolio consists of a short forward and a long call with the same maturity. The call's strike equals the forward price K. What is the portfolio's payoff?",
+          "choices": [
+            "max(K − S_T, 0), the payoff of a long put",
+            "max(S_T − K, 0), the payoff of a long call",
+            "−max(S_T − K, 0), the payoff of a short call",
+            "K − S_T, the payoff of a short forward"
+          ],
+          "answer": 0,
+          "explanation": "(K − S_T) + max(S_T − K, 0) gives 0 when S_T > K and K − S_T when S_T < K. That equals max(K − S_T, 0), a long put.",
+          "learningPoint": "Short forward + long call = long put.",
+          "reference": "§4.4, Q4.17"
+        },
+        {
+          "id": "id-pay-55",
+          "topic": "pay",
+          "prompt": "A portfolio consists of a short forward and a short put with the same maturity. The put's strike equals the forward price K. What is the portfolio's payoff?",
+          "choices": [
+            "−max(S_T − K, 0), the payoff of a short call",
+            "max(K − S_T, 0), the payoff of a long put",
+            "max(S_T − K, 0), the payoff of a long call",
+            "−max(K − S_T, 0), the payoff of a short put"
+          ],
+          "answer": 0,
+          "explanation": "(K − S_T) − max(K − S_T, 0) gives K − S_T when S_T > K and 0 when S_T < K. That is −max(S_T − K, 0) = min(K − S_T, 0), a short call.",
+          "learningPoint": "Short forward + short put = short call.",
+          "reference": "§4.4, Q4.18"
+        },
+        {
+          "id": "id-hedge-56",
+          "topic": "hedge",
+          "prompt": "What is the key difference between hedging with a forward and hedging with an option?",
+          "choices": [
+            "A forward locks in a price; an option protects the downside but keeps the upside",
+            "A forward keeps the upside; an option locks in a price",
+            "Both lock in a price, but options settle in cash",
+            "Both keep the upside, but forwards cost a premium"
+          ],
+          "answer": 0,
+          "explanation": "A forward locks in the price for a future transaction. An option protects against adverse moves while letting the holder benefit from favourable ones.",
+          "learningPoint": "Forward = lock in. Option = insurance with upside.",
+          "reference": "§4.5, Summary"
+        },
+        {
+          "id": "id-hedge-57",
+          "topic": "hedge",
+          "prompt": "A US treasurer must PAY EUR 1 million in six months and wants protection against a rising euro but to benefit if it falls. Which instrument fits best?",
+          "choices": [
+            "Buy a European call on EUR 1 million",
+            "Buy a European put on EUR 1 million",
+            "Enter a short forward on EUR 1 million",
+            "Sell a European call on EUR 1 million"
+          ],
+          "answer": 0,
+          "explanation": "The treasurer needs the right to buy euros at a capped rate. A long call gives that and allows buying more cheaply if the euro falls. A put or short forward hedges a receivable, and selling a call adds risk.",
+          "learningPoint": "Paying foreign currency → long call (or long forward).",
+          "reference": "§4.5"
+        },
+        {
+          "id": "id-hedge-58",
+          "topic": "hedge",
+          "prompt": "A treasurer paying EUR 1 million in six months buys a call at strike USD 1.1950 for USD 40,000. The rate at expiry is USD 1.2500. Ignoring discounting, what is the total USD cost of the euros?",
+          "choices": [
+            "USD 1,235,000",
+            "USD 1,195,000",
+            "USD 1,250,000",
+            "USD 1,290,000"
+          ],
+          "answer": 0,
+          "explanation": "The call is exercised: 1,000,000 × 1.1950 = 1,195,000, plus the 40,000 premium = 1,235,000. Ignoring the premium (1,195,000) is a common trap.",
+          "learningPoint": "Total hedged cost = exercise cost + premium.",
+          "reference": "§4.5"
+        },
+        {
+          "id": "id-hedge-59",
+          "topic": "hedge",
+          "prompt": "A treasurer paying EUR 1 million could hedge with a six-month forward at USD 1.1948 or a call at strike USD 1.1950 costing USD 40,000. If the rate at expiry is USD 1.1000, how much better off is the option hedge (ignoring discounting)?",
+          "choices": [
+            "USD 54,800 better",
+            "USD 94,800 better",
+            "USD 40,000 worse",
+            "USD 54,800 worse"
+          ],
+          "answer": 0,
+          "explanation": "Forward cost = 1,194,800. Option cost = 1,100,000 + 40,000 = 1,140,000. Difference = 54,800 in favour of the option. Forgetting the premium gives 94,800.",
+          "learningPoint": "Compare hedges on total cost, including the premium.",
+          "reference": "§4.5"
+        },
+        {
+          "id": "id-hedge-60",
+          "topic": "hedge",
+          "prompt": "A treasurer receiving EUR 1 million buys a put at strike USD 1.1950 for USD 40,000. The rate at expiry is USD 1.1000. Ignoring discounting, what are the net USD proceeds?",
+          "choices": [
+            "USD 1,155,000",
+            "USD 1,195,000",
+            "USD 1,100,000",
+            "USD 1,060,000"
+          ],
+          "answer": 0,
+          "explanation": "The put is exercised: 1,000,000 × 1.1950 = 1,195,000, less the 40,000 premium = 1,155,000.",
+          "learningPoint": "Net hedged proceeds = exercise proceeds − premium.",
+          "reference": "§4.5"
+        },
+        {
+          "id": "id-hedge-61",
+          "topic": "hedge",
+          "prompt": "A treasurer buying a call to hedge a euro payable wants to reduce the option premium. What is the effect of raising the strike price?",
+          "choices": [
+            "The premium falls, but protection is reduced",
+            "The premium falls, and protection improves",
+            "The premium rises, but protection is reduced",
+            "The premium and protection are both unchanged"
+          ],
+          "answer": 0,
+          "explanation": "A higher call strike is cheaper, but the treasurer is only protected above a higher rate. For a put, the premium falls by lowering the strike, again with less protection.",
+          "learningPoint": "Cheaper hedge = less protection.",
+          "reference": "§4.5"
+        },
+        {
+          "id": "id-spec-62",
+          "topic": "spec",
+          "prompt": "Why are derivatives attractive to speculators?",
+          "choices": [
+            "They allow large risks to be taken with a small upfront payment",
+            "They eliminate the possibility of losing money",
+            "They always produce higher returns than the underlying",
+            "They remove the need to forecast the price direction"
+          ],
+          "answer": 0,
+          "explanation": "Derivatives give leverage: exposure to a large position for a small payment. That magnifies both gains and losses, and the speculator still needs to be right about direction.",
+          "learningPoint": "Leverage magnifies gains AND losses.",
+          "reference": "§4.5, Q4.10"
+        },
+        {
+          "id": "id-spec-63",
+          "topic": "spec",
+          "prompt": "Buying a call option on an asset is similar, in terms of risk, to:",
+          "choices": [
+            "Borrowing money to buy the asset",
+            "Lending money at the risk-free rate",
+            "Selling the asset short",
+            "Buying a put option on the asset"
+          ],
+          "answer": 0,
+          "explanation": "A call lets you take big risks with a small initial investment, accentuating gains and losses, much like borrowing to buy the asset.",
+          "learningPoint": "Options provide leverage, like borrowing to buy.",
+          "reference": "§4.5, Q4.10"
+        },
+        {
+          "id": "id-spec-64",
+          "topic": "spec",
+          "prompt": "A stock is at USD 40. A speculator has USD 4,000 and can buy 100 shares or 2,000 calls (strike USD 42, price USD 2). If the stock ends at USD 45, what are the profits (ignoring discounting)?",
+          "choices": [
+            "Shares USD 500; options USD 2,000",
+            "Shares USD 500; options USD 6,000",
+            "Shares USD 4,500; options USD 2,000",
+            "Shares USD 500; options USD 10,000"
+          ],
+          "answer": 0,
+          "explanation": "Shares: 100 × (45 − 40) = 500. Options: 2,000 × (45 − 42) = 6,000, less the 4,000 cost = 2,000. The options make four times as much.",
+          "learningPoint": "Option profit = payoff − premium paid.",
+          "reference": "§4.5, Table 4.5"
+        },
+        {
+          "id": "id-spec-65",
+          "topic": "spec",
+          "prompt": "Same speculator (USD 4,000; 100 shares at USD 40 or 2,000 calls with strike USD 42 at USD 2). If the stock ends at USD 50, how many times more profitable is the option strategy?",
+          "choices": [
+            "12 times",
+            "4 times",
+            "8 times",
+            "16 times"
+          ],
+          "answer": 0,
+          "explanation": "Shares: 100 × 10 = 1,000. Options: 2,000 × 8 = 16,000 − 4,000 = 12,000. 12,000 ÷ 1,000 = 12.",
+          "learningPoint": "Leverage grows as the price moves further in your favour.",
+          "reference": "§4.5, Table 4.5"
+        },
+        {
+          "id": "id-spec-66",
+          "topic": "spec",
+          "prompt": "A stock is at USD 70. A trader can buy 100 shares or calls on 1,000 shares (strike USD 70, USD 7 each). At what stock price do the two strategies give the same profit (ignoring discounting)?",
+          "choices": [
+            "About USD 77.78",
+            "USD 77.00",
+            "USD 70.00",
+            "About USD 63.00"
+          ],
+          "answer": 0,
+          "explanation": "Set 100(S − 70) = 1,000(S − 70) − 7,000 → 900S = 70,000 → S ≈ 77.78. Above this the options win; below it the shares win. USD 77 is only the options' own breakeven.",
+          "learningPoint": "Equal-profit price ≠ option breakeven; set the profits equal.",
+          "reference": "§4.5, Q4.20"
+        },
+        {
+          "id": "id-spec-67",
+          "topic": "spec",
+          "prompt": "A speculator expects a stock to fall but wants a maximum loss limited to the amount paid upfront. Which position fits?",
+          "choices": [
+            "Buy a put option",
+            "Sell futures on the stock",
+            "Sell a put option",
+            "Buy a call option"
+          ],
+          "answer": 0,
+          "explanation": "A long put profits from a fall, and the maximum loss is the premium. Short futures also profit from a fall but have unlimited loss if the price rises. A short put or long call bets on a rise.",
+          "learningPoint": "Bearish with limited loss → long put.",
+          "reference": "§4.4–4.5"
+        },
+        {
+          "id": "id-spec-68",
+          "topic": "spec",
+          "prompt": "A speculator goes long futures on 1,000 units at USD 40, posting only a small deposit. At maturity the price is USD 36. What is the speculator's payoff?",
+          "choices": [
+            "−USD 4,000",
+            "+USD 4,000",
+            "−USD 400",
+            "USD 0"
+          ],
+          "answer": 0,
+          "explanation": "Long payoff = 1,000 × (36 − 40) = −USD 4,000. Unlike an option holder, a futures holder cannot walk away, so USD 0 is wrong. The small deposit is what gives futures their leverage, so the loss can be large relative to the money put up.",
+          "learningPoint": "Futures speculation: linear payoff, no walk-away, high leverage.",
+          "reference": "§4.3, §4.5"
+        },
+        {
+          "id": "id-spec-69",
+          "topic": "spec",
+          "prompt": "A stock is at USD 70. A trader can buy 100 shares for USD 7,000 or calls on 1,000 shares (strike USD 70, USD 7 each). If the stock ends at USD 60, what are the profits (ignoring discounting)?",
+          "choices": [
+            "Shares −USD 1,000; options −USD 7,000",
+            "Shares −USD 1,000; options −USD 10,000",
+            "Shares −USD 1,000; options USD 0",
+            "Shares −USD 10,000; options −USD 7,000"
+          ],
+          "answer": 0,
+          "explanation": "Shares: 100 × (60 − 70) = −1,000. The calls are not exercised (60 < 70), so the whole 1,000 × 7 = 7,000 premium is lost. Option losses are capped at the premium, so −10,000 is wrong.",
+          "learningPoint": "The option strategy is much riskier: it loses the full premium when the price doesn't rise.",
+          "reference": "§4.5, Q4.19"
+        },
+        {
+          "id": "id-arb-70",
+          "topic": "arb",
+          "prompt": "Arbitrage is best described as:",
+          "choices": [
+            "Exploiting inconsistent pricing across markets for a riskless profit",
+            "Taking leveraged positions on the expected price direction",
+            "Reducing an existing exposure using derivatives",
+            "Quoting bid and ask prices to earn the spread"
+          ],
+          "answer": 0,
+          "explanation": "Arbitrage exploits inconsistent pricing across two or more markets. Speculation bets on direction, hedging reduces exposure, and dealers quote prices.",
+          "learningPoint": "Arbitrage = mispricing, so profit without risk.",
+          "reference": "§4.5"
+        },
+        {
+          "id": "id-arb-71",
+          "topic": "arb",
+          "prompt": "An asset with no income trades at USD 50. The borrowing rate is 3% a year, and the one-year forward price is USD 52. For 1 million units, what is the arbitrage profit?",
+          "choices": [
+            "USD 500,000",
+            "USD 2,000,000",
+            "USD 1,500,000",
+            "USD 0"
+          ],
+          "answer": 0,
+          "explanation": "Borrow 50,000,000, buy 1 million units, and sell forward at 52. In one year receive 52,000,000 and repay 50,000,000 × 1.03 = 51,500,000. Profit = 500,000. Ignoring interest gives 2,000,000.",
+          "learningPoint": "Arbitrage: buy spot with borrowed money, sell forward, then repay the loan with interest.",
+          "reference": "§4.5"
+        },
+        {
+          "id": "id-arb-72",
+          "topic": "arb",
+          "prompt": "In the arbitrage where the forward price is too high relative to spot plus financing, which set of trades is correct?",
+          "choices": [
+            "Borrow, buy the asset spot, and enter a short forward",
+            "Borrow, buy the asset spot, and enter a long forward",
+            "Sell the asset short, lend, and enter a short forward",
+            "Buy the asset spot and buy a call at the forward price"
+          ],
+          "answer": 0,
+          "explanation": "If the forward is overpriced, buy cheap now (financed by borrowing) and lock in selling at the rich forward price with a short forward.",
+          "learningPoint": "Forward too high → buy spot, sell forward.",
+          "reference": "§4.5"
+        },
+        {
+          "id": "id-arb-73",
+          "topic": "arb",
+          "prompt": "An asset with no income trades at USD 100. The borrowing rate is 5% a year, and the one-year forward price is USD 108. What is the arbitrage profit for 10,000 units?",
+          "choices": [
+            "USD 30,000",
+            "USD 80,000",
+            "USD 50,000",
+            "USD 0"
+          ],
+          "answer": 0,
+          "explanation": "Borrow 1,000,000 and buy 10,000 units; sell forward at 108 for 1,080,000. Repay 1,000,000 × 1.05 = 1,050,000. Profit = 30,000.",
+          "learningPoint": "Profit per unit = F − S(1 + r).",
+          "reference": "§4.5"
+        },
+        {
+          "id": "id-arb-74",
+          "topic": "arb",
+          "prompt": "Why are arbitrage opportunities usually temporary?",
+          "choices": [
+            "Arbitrageurs' trades move prices back into line, closing the gap",
+            "Regulators ban arbitrage once it is discovered",
+            "Exchanges change contract terms to remove mispricing",
+            "Arbitrage profits must be returned to the counterparty"
+          ],
+          "answer": 0,
+          "explanation": "As traders buy the cheap asset and sell the expensive one, the cheap price rises and the expensive price falls until the mispricing disappears. This competition keeps markets consistent.",
+          "learningPoint": "Arbitrage trading removes the very mispricing it exploits.",
+          "reference": "§4.5"
+        },
+        {
+          "id": "id-risk-75",
+          "topic": "risk",
+          "prompt": "What is the main risk highlighted for organisations that use derivatives?",
+          "choices": [
+            "Traders mandated to hedge or arbitrage may speculate without others knowing",
+            "Derivatives always lose money because of bid-ask spreads",
+            "Exchanges frequently default on futures contracts",
+            "Hedging with forwards is riskier than speculating"
+          ],
+          "answer": 0,
+          "explanation": "Leverage makes it easy to take large risks, and speculation can be tempting. Without controls, hedgers or arbitrageurs can quietly become speculators.",
+          "learningPoint": "Key risk: unauthorized speculation; the defence is strong controls.",
+          "reference": "§4.6"
+        },
+        {
+          "id": "id-risk-76",
+          "topic": "risk",
+          "prompt": "How did traders such as Jérôme Kerviel and Nick Leeson lose billions of dollars?",
+          "choices": [
+            "They switched from hedging or arbitrage to speculating without anyone realising",
+            "They hedged correctly, but the exchanges they used failed",
+            "They followed authorized strategies that suffered extreme market moves",
+            "They paid excessive premiums for options to protect their banks"
+          ],
+          "answer": 0,
+          "explanation": "Both had mandates for hedging or arbitrage but took unauthorized speculative positions. As losses grew, they took ever larger bets to recover them.",
+          "learningPoint": "Rogue trading = mandate drift + concealment + doubling up.",
+          "reference": "§4.6, Q4.9"
+        },
+        {
+          "id": "id-risk-77",
+          "topic": "risk",
+          "prompt": "Match the trader to the loss: who lost about USD 1 billion through unauthorized bets on the Nikkei index, bringing down Barings Bank?",
+          "choices": [
+            "Nick Leeson",
+            "Jérôme Kerviel",
+            "John Rusnak",
+            "Kweku Adoboli"
+          ],
+          "answer": 0,
+          "explanation": "Leeson lost about USD 1 billion on the Nikkei at Barings. Kerviel lost about USD 7 billion at Société Générale. Rusnak lost USD 700 million at Allied Irish Bank. Adoboli lost about USD 2.3 billion at UBS.",
+          "learningPoint": "Leeson–Barings–Nikkei–$1bn.",
+          "reference": "§4.6"
+        },
+        {
+          "id": "id-risk-78",
+          "topic": "risk",
+          "prompt": "Which rogue trader concealed foreign currency losses of USD 700 million by creating fictitious option trades?",
+          "choices": [
+            "John Rusnak at Allied Irish Bank",
+            "Kweku Adoboli at UBS",
+            "Jérôme Kerviel at Société Générale",
+            "Nick Leeson at Barings Bank"
+          ],
+          "answer": 0,
+          "explanation": "John Rusnak lost USD 700 million in FX trading at Allied Irish Bank and hid it with fictitious option trades.",
+          "learningPoint": "Rusnak–AIB–FX–fake options–$700m.",
+          "reference": "§4.6"
+        },
+        {
+          "id": "id-risk-79",
+          "topic": "risk",
+          "prompt": "Which trader lost about USD 7 billion speculating on equity indices while appearing to be an arbitrageur?",
+          "choices": [
+            "Jérôme Kerviel at Société Générale",
+            "Kweku Adoboli at UBS",
+            "Nick Leeson at Barings Bank",
+            "John Rusnak at Allied Irish Bank"
+          ],
+          "answer": 0,
+          "explanation": "Kerviel lost about USD 7 billion at Société Générale while giving the appearance of being an arbitrageur. Adoboli's loss at UBS was about USD 2.3 billion.",
+          "learningPoint": "Kerviel–SocGen–$7bn (largest of the four).",
+          "reference": "§4.6"
+        },
+        {
+          "id": "id-risk-80",
+          "topic": "risk",
+          "prompt": "Kweku Adoboli's unauthorized speculative positions in stock market indices at UBS led to a loss of about:",
+          "choices": [
+            "USD 2.3 billion",
+            "USD 700 million",
+            "USD 1 billion",
+            "USD 7 billion"
+          ],
+          "answer": 0,
+          "explanation": "Adoboli lost about USD 2.3 billion at UBS. USD 700 million was Rusnak (Allied Irish Bank), USD 1 billion was Leeson (Barings) and USD 7 billion was Kerviel (Société Générale).",
+          "learningPoint": "Adoboli–UBS–indices–$2.3bn.",
+          "reference": "§4.6"
+        }
+      ]
     },
     {
       "id": "exchanges-otc",
