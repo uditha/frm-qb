@@ -1,0 +1,112 @@
+{
+  "id": "quantitative",
+  "title": "Quantitative Analysis",
+  "examWeight": "20%",
+  "blurb": "Probability, statistics, regression, and time series used in risk measurement.",
+  "lessons": [
+    {
+      "id": "probability",
+      "title": "Fundamentals of Probability",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "random-variables",
+      "title": "Random Variables",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "univariate",
+      "title": "Common Univariate Random Variables",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "multivariate",
+      "title": "Multivariate Random Variables",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "sample-moments",
+      "title": "Sample Moments",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "hypothesis-testing",
+      "title": "Hypothesis Testing",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "linear-regression",
+      "title": "Linear Regression",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "multiple-regression",
+      "title": "Regression with Multiple Explanatory Variables",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "regression-diagnostics",
+      "title": "Regression Diagnostics",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "stationary-series",
+      "title": "Stationary Time Series",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "nonstationary-series",
+      "title": "Non-Stationary Time Series",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "returns-volatility",
+      "title": "Measuring Returns, Volatility, and Correlation",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "simulation",
+      "title": "Simulation and Bootstrapping",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    }
+  ]
+}

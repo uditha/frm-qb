@@ -1,0 +1,168 @@
+{
+  "id": "markets",
+  "title": "Financial Markets and Products",
+  "examWeight": "30%",
+  "blurb": "Banks, funds, and the markets and products used to take and transfer risk.",
+  "lessons": [
+    {
+      "id": "banks",
+      "title": "Banks",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "insurers-pensions",
+      "title": "Insurance Companies and Pension Plans",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "fund-management",
+      "title": "Fund Management",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "intro-derivatives",
+      "title": "Introduction to Derivatives",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "exchanges-otc",
+      "title": "Exchanges and OTC Markets",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "central-clearing",
+      "title": "Central Clearing",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "futures-markets",
+      "title": "Futures Markets",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "hedging-futures",
+      "title": "Using Futures for Hedging",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "fx-markets",
+      "title": "Foreign Exchange Markets",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "pricing-forwards",
+      "title": "Pricing Financial Forwards and Futures",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "commodity-forwards",
+      "title": "Commodity Forwards and Futures",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "options-markets",
+      "title": "Options Markets",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "stock-options",
+      "title": "Properties of Stock Options",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "option-strategies",
+      "title": "Trading Strategies Involving Options",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "exotic-options",
+      "title": "Exotic Options",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "interest-rates",
+      "title": "Properties of Interest Rates",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "corporate-bonds",
+      "title": "Corporate Bonds",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "mbs",
+      "title": "Mortgages and Mortgage-Backed Securities",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "rate-futures",
+      "title": "Interest Rate Futures",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "swaps",
+      "title": "Swaps",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    }
+  ]
+}

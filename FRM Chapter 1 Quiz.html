@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FRM Chapter 1 Quiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: calm, exam-room precise, encouraging
+   IDEA: a precision risk gauge — every answer moves a needle along a scale
+   PICTURE: a horizontal tick scale (one tick per question) with an orange pointer and a big readout
+   COLOUR and TYPE: aluminium, black, orange pointer; night graphite. Geist throughout
+   LAYOUT: one calm column, sticky scale on top, large tap targets, feedback directly under the answer */
+:root{color-scheme:light dark;
+--bg:light-dark(#e9eaec,#141517);--panel:light-dark(#fff,#1d1f22);--ink:light-dark(#111214,#ececee);
+--mute:light-dark(#5d6168,#9a9ea6);--line:light-dark(#cfd1d5,#2e3136);--acc:#ff4f00;
+--ok:light-dark(#17784f,#4cc68f);--okbg:light-dark(#e3f3ea,#14281f);--bad:light-dark(#c42b25,#ff7a70);--badbg:light-dark(#fbe6e4,#2d1716);
+--lp:light-dark(#fff1e8,#2a1d15)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Geist,system-ui,-apple-system,sans-serif;overflow-x:clip}
+.wrap{max-width:720px;margin:0 auto;padding:0 max(4vw,16px) 48px}
+h1{font-size:clamp(28px,7vw,40px);line-height:1.08;font-weight:700;margin:24px 0 6px;text-wrap:balance;letter-spacing:-.02em}
+h2{font-size:20px;line-height:1.25;margin:28px 0 10px}
+.sub{color:var(--mute);margin:0 0 18px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,summary:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.gauge{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 18px 14px}
+.read{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.big{font-size:clamp(44px,13vw,64px);font-weight:700;line-height:1;letter-spacing:-.03em}
+.read span{color:var(--mute)}
+.scale{position:relative;height:38px;margin-top:14px}
+.ticks{position:absolute;inset:0 0 14px 0;display:flex;align-items:flex-end;gap:2px}
+.ticks i{flex:1;height:10px;background:var(--line);border-radius:2px}
+.ticks i.ok{background:var(--ok);height:18px}.ticks i.bad{background:var(--bad);height:14px}.ticks i.cur{background:var(--ink);height:22px}
+.ptr{position:absolute;bottom:0;width:0;height:0;border:7px solid transparent;border-bottom:10px solid var(--acc);transform:translateX(-7px);transition:left .4s ease}
+.ends{display:flex;justify-content:space-between;font-size:13px;color:var(--mute)}
+.modes{display:grid;gap:10px;margin-top:18px}
+.mode{display:flex;justify-content:space-between;align-items:center;gap:12px;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;min-height:60px}
+.mode b{display:block;font-size:17px}.mode small{color:var(--mute);font-size:14px}
+.mode.pri{background:var(--ink);color:var(--bg);border-color:var(--ink)}.mode.pri small{color:inherit;opacity:.75}
+.mode:disabled{opacity:.45;cursor:default}
+.arrow{font-size:22px;flex:none}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:9px 14px;min-height:44px;font-size:15px}
+.chip em{font-style:normal;color:var(--mute);margin-left:4px;font-size:13px}
+details{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin-top:10px}
+summary{padding:14px 16px;font-weight:600;cursor:pointer;min-height:44px}
+details .in{padding:0 16px 14px}
+details ol,details ul{margin:0;padding-left:20px}details li{margin:4px 0}
+.top{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0 6px;border-bottom:1px solid var(--line)}
+.topr{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:14px;color:var(--mute)}
+.quit{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:8px 12px;min-height:40px;font-size:14px}
+.tag{display:inline-block;font-size:13px;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:2px 10px;margin:18px 0 8px}
+.q{font-size:18px;line-height:1.45;font-weight:500;margin:0 0 16px}
+.opts{display:grid;gap:10px}
+.opt{display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--panel);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;min-height:56px;font-size:16px;line-height:1.4;transition:transform .12s}
+.opt:active{transform:scale(.99)}
+.opt .l{flex:none;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font-weight:600;font-size:14px}
+.opt.ok{border-color:var(--ok);background:var(--okbg)}.opt.ok .l{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt.bad{border-color:var(--bad);background:var(--badbg)}.opt.bad .l{background:var(--bad);border-color:var(--bad);color:#fff}
+.opt.dim{opacity:.55}
+.fb{margin-top:16px;display:none}.fb.on{display:block;animation:up .3s ease}
+@keyframes up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.fb.on{animation:none}.ptr{transition:none}}
+.verdict{font-weight:700;font-size:18px;margin:0 0 6px}.verdict.ok{color:var(--ok)}.verdict.bad{color:var(--bad)}
+.why{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.why p{margin:0 0 8px}.why p:last-child{margin:0}
+.lp{background:var(--lp);border-radius:14px;padding:14px 16px;margin-top:10px}
+.lp h3{margin:0 0 4px;font-size:15px;color:var(--acc)}
+.lp p{margin:0}
+.ref{font-size:13px;color:var(--mute);margin-top:8px}
+.next{width:100%;margin-top:16px;background:var(--acc);color:#fff;border:0;border-radius:14px;min-height:54px;font-size:17px;font-weight:600}
+.rows{display:grid;gap:8px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 54px;gap:10px;align-items:center;font-size:15px}
+.bar{height:8px;border-radius:4px;background:var(--line);margin-top:4px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ink)}
+.row .n{text-align:right;font-variant-numeric:tabular-nums;color:var(--mute);white-space:nowrap}
+.miss{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:10px}
+.miss p{margin:0 0 6px}.miss .a{color:var(--ok);font-weight:600}
+.note{font-size:13px;color:var(--mute);margin-top:22px}
+.reset{background:none;border:0;color:var(--mute);text-decoration:underline;padding:8px 0;min-height:44px;font-size:14px}
+[hidden]{display:none!important}
+.pace{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px}
+.pace div{background:var(--bg);border-radius:10px;padding:10px 12px}
+.pace b{display:block;font-size:20px;font-variant-numeric:tabular-nums;white-space:nowrap}.pace span{font-size:13px;color:var(--mute)}
+.miss .you{color:var(--bad)}
+.sheet h3{font-size:15px;margin:14px 0 4px}.sheet h3:first-child{margin-top:0}.sheet li{font-size:15px}
+.kbd{font-size:13px;color:var(--mute);margin-top:10px}
+@media(hover:none){.kbd{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<script>
+{
+const T={proc:"Risk process & choices",unk:"Knowns & unknowns",loss:"EL, UL & tail risk",var:"VaR, ES & stress tests",fac:"Risk factors & interactions",str:"Structural change",hum:"Human agency & 3 lines",typ:"Risk typology",agg:"Risk aggregation",rar:"RAROC & economic capital",erm:"ERM & the big picture",hist:"History & foundations"};
+// o[0] is always the correct answer; options are shuffled at display
+const Q=[
+{t:"loss",q:"A bank holds a USD 10 million loan. The borrower's 1-year probability of default is 2% and the expected recovery rate is 60%. What is the expected loss?",o:["USD 80,000","USD 120,000","USD 200,000","USD 4,000,000"],e:"EL = EAD × LGD × PD. LGD = 1 − recovery = 40%. So 10,000,000 × 0.40 × 0.02 = USD 80,000. USD 120,000 wrongly uses the 60% recovery rate as LGD; USD 200,000 ignores LGD; USD 4,000,000 is EAD × LGD with no PD.",lp:"Always convert recovery rate to LGD (1 − RR) before plugging in. EL is a cost to be priced in, not a risk to be capitalised.",r:"§1.4 Quantitative risk metrics"},
+{t:"loss",q:"A USD 5 million facility has an expected recovery rate of 70% thanks to collateral, and the obligor's PD is 1.5%. The bank prices the loan to cover EL only. Which annual charge covers EL?",o:["USD 22,500","USD 52,500","USD 75,000","USD 1,500,000"],e:"LGD = 30%, so EL = 5,000,000 × 0.30 × 0.015 = USD 22,500. USD 52,500 uses the recovery rate as LGD; USD 75,000 ignores LGD; USD 1,500,000 is EAD × LGD.",lp:"Collateral is a classic mitigation tool: it reduces severity (LGD), not the probability of default.",r:"§1.2 and §1.4"},
+{t:"loss",q:"Which statement about expected loss (EL) and unexpected loss (UL) is most accurate?",o:["EL is priced into the product like a cost; UL is absorbed by economic capital","EL is held as economic capital, while UL is recovered through the product's price margin","EL and UL are both fully absorbed each year by the loan-loss provisions the bank sets aside","UL is the average loss over a full credit cycle, so it is priced into the product like EL"],e:"Where EL can be estimated with confidence, it behaves like a variable cost and is covered by pricing. UL — the extent to which losses depart from the average — is what risk capital is held for.",lp:"Exam shorthand: EL → pricing / provisions; UL → economic capital; tail loss → stress tests and scenario analysis.",r:"§1.4 Expect the unexpected"},
+{t:"loss",q:"Portfolio X consists of thousands of small, well-diversified consumer loans. Portfolio Y has a few very large loans to borrowers in the same industry. Both have the same EL. Which is correct?",o:["Portfolio Y will have the higher unexpected loss","Portfolio X will have the higher unexpected loss, because it holds more individual loans that can default","Both will have the same unexpected loss, since unexpected loss is driven by EL","Unexpected loss depends only on PD, so the two portfolios cannot be compared"],e:"Concentration (few large loans) and positive correlation (same industry) increase the chance of losses departing far from the average. Granular, diversified portfolios have losses close to EL.",lp:"Same EL does not mean same risk. UL is driven by concentration and correlation.",r:"§1.1 Credit risk; §1.4"},
+{t:"loss",q:"A credit portfolio shows very low losses for many years, then very large losses for a short period at the end of each cycle. From a risk management viewpoint this portfolio:",o:["Is deceptive and needs large risk capital on top of pricing in EL","Is safe, because its average loss over the full cycle is low and stable","Needs no extra capital, because its expected loss is already priced into the product","Should be judged on the most recent three benign years of loss data only"],e:"The book warns these portfolios lull managers into complacency. Banks must allocate large risk capital against the big unexpected losses that can trigger insolvency, on top of pricing EL.",lp:"Good years can hide risk. Judge a cyclical portfolio over a full cycle, not the benign part.",r:"§1.4 From unexpected to extreme"},
+{t:"var",q:"A desk reports a 1-day 99% VaR of USD 1 million. Which interpretation is correct?",o:["Losses should exceed USD 1 million on about 1 in 100 trading days","The largest loss the desk could possibly suffer in one day is USD 1 million","The average loss on the worst 1% of trading days is about USD 1 million","There is a 99% probability that the desk will lose USD 1 million tomorrow"],e:"VaR is a loss threshold at a confidence level. It says nothing about how big the loss is on the days it is exceeded — that is what expected shortfall addresses (the third option describes ES).",lp:"VaR = 'how bad on a normal bad day', not 'how bad can it get'.",r:"§1.4 Value-at-Risk"},
+{t:"var",q:"For a given loss distribution, a risk manager lowers the VaR confidence level from 99% to 95%. What happens to the VaR number?",o:["It falls","It rises","It stays the same","It becomes equal to expected shortfall"],e:"A lower confidence level cuts the distribution at a less extreme point, so the VaR threshold is smaller.",lp:"Higher confidence → higher VaR. Fatter tail → higher VaR. Both are popular exam twists.",r:"§1.4 Value-at-Risk"},
+{t:"var",q:"Two portfolios have the same EL, but Portfolio B's loss distribution has a much fatter tail. Compared with Portfolio A, Portfolio B has:",o:["More unexpected loss and a larger VaR","Less unexpected loss and a smaller VaR","The same VaR, because EL is equal","A smaller VaR but a larger expected shortfall"],e:"A fatter tail means more probability mass at extreme losses, increasing both UL and VaR at any given confidence level.",lp:"VaR responds to the shape of the distribution, not just its mean.",r:"§1.4 Value-at-Risk"},
+{t:"var",q:"Which measure is designed to quantify the mean loss in the tail of the distribution beyond the VaR cut-off?",o:["Expected shortfall","Expected loss","Delta","Economic capital"],e:"Expected shortfall (ES) is the average of losses beyond the VaR threshold. It was promoted after the 2007–2009 crisis because VaR ignores tail size.",lp:"ES answers the question VaR cannot: 'if we breach, how bad on average?'",r:"Box 1.5"},
+{t:"var",q:"What do scenario analysis and stress testing primarily focus on?",o:["The severity of a plausible worst case, not its probability","Estimating the precise probability of rare events from historical data","Measuring the portfolio's expected loss under normal market conditions","Replacing VaR with a single aggregated risk number for the whole firm"],e:"Stress tests sidestep the problem of estimating the frequency of rare events. They imagine a plausible worst case — possibly unfolding over time — and measure its impact.",lp:"Stress testing = severity, not frequency. Even when highly quantitative, the numbers assess impact.",r:"Box 1.5"},
+{t:"var",q:"Which best describes reverse stress testing?",o:["Starting from a critical loss and working back to its causes","Applying a scenario handed over by the regulator to the firm's current positions","Back-testing the firm's VaR model against its realised daily profit and loss","Re-running last year's stress scenarios in reverse order of their severity"],e:"Reverse stress testing begins at the outcome (how bad could losses get?) and traces back to the exposures and activities that could cause it, so the firm can avoid the worst.",lp:"Normal stress test: scenario → loss. Reverse stress test: loss → scenario.",r:"Box 1.5"},
+{t:"var",q:"Which statement about VaR before and after the 2007–2009 crisis is most accurate?",o:["Its flaws were known pre-crisis; it is still used alongside ES and scenarios","Regulators abandoned it after the crisis and replaced it entirely with expected shortfall","It was always calculated with one standard methodology across the whole industry","It fully captures tail risk, provided it is calculated at a 99.9% confidence level"],e:"VaR had at least three main methodologies and many simplifying assumptions. The crisis exposed over-dependence on it, but it remains an important tool alongside ES and stress tests.",lp:"Risk cannot be reduced to a single number — the chapter's central post-crisis lesson.",r:"§1.8 and Box 1.5"},
+{t:"str",q:"Data on extreme losses are scarce. Which branch of statistics is used to make the tail of a loss distribution more visible?",o:["Extreme Value Theory (EVT)","Bayesian regression","Modern portfolio theory","The Capital Asset Pricing Model"],e:"EVT is used to extract the most useful information about tail behaviour when only a few extreme observations exist.",lp:"Tail risk is an extreme version of unexpected loss; EVT helps when the data are thin.",r:"§1.6"},
+{t:"str",q:"A 'once-in-100-years' loss starts occurring roughly once a decade. What is the most likely explanation?",o:["A structural change; more historical data will not help","Bad luck; extending the historical data series will correct the frequency estimate","The VaR confidence level is set too low and simply needs to be raised to 99.9%","Pure model error; the true frequency of the loss is still once in 100 years"],e:"When the structure underlying a system changes, large losses can rise in frequency or size, risk factors can move in lockstep and new loss sources can appear. History is no longer a good guide until the structural problem is fixed.",lp:"Human systems (markets) change constantly through behaviour, regulation and innovation — unlike most natural systems.",r:"§1.6"},
+{t:"str",q:"Which of the following is the best example of structural change in a market leading to a systemic crisis?",o:["The rise of US subprime and interest-only mortgages from the early 2000s","The 1974 closure of Herstatt bank, which caused cross-currency settlement failures","The 1990s outbreak of rogue trading that pushed regulators toward op risk capital","The boom-bust cycles of commercial real estate lending in markets around the world"],e:"Unusual mortgage types grew from a small fraction to a large share of originations while the subprime share also increased — a structural shift feeding the 2007–2009 crisis. CRE cycles illustrate wrong-way risk, not structural change.",lp:"Watch for shifts in product mix, leverage and funding — they change EL, UL and tail risk together.",r:"§1.6"},
+{t:"unk",q:"In his 1921 work, Frank Knight distinguished 'risk' from 'uncertainty'. Knightian uncertainty refers to:",o:["Variability that cannot be quantified at all","Risk that can be measured using statistical science","Expected loss that can be priced into a product","What Rumsfeld called 'unknown unknowns'"],e:"Knight called quantifiable variability 'risk' and unquantifiable variability 'uncertainty'. 'Unknown unknowns' is Rumsfeld's 2002 phrase, not Knight's.",lp:"Trap: 'unknown unknowns' = Rumsfeld; 'uncertainty' = Knight.",r:"§1.3"},
+{t:"unk",q:"Before 1950 the health threat of smoking was uncertain; by the mid-1970s it was a quantified statistical risk. This shows that:",o:["The line between uncertainty and measurable risk can move","Knightian uncertainties are always small compared with measurable statistical risks","Risk managers should ignore a risk until it can be measured with statistical data","Once a risk has been quantified, it can never become uncertain again in future"],e:"Research turned an uncertainty into a 'known known'. Risk managers aim to move poorly understood risks from the periphery towards the centre of Figure 1.5.",lp:"Uncertain ≠ small. Knightian risks can be more severe and prevalent than first thought.",r:"§1.3"},
+{t:"unk",q:"A risk manager cannot estimate the probability of a catastrophic event but believes it is plausible and severe. What is the most appropriate response?",o:["Avoid or transfer it, and acknowledge the uncertainty","Ignore it until the firm has gathered enough data to estimate its probability","Give it a probability from a normal distribution so that it fits inside the VaR model","Hold economic capital equal to its estimated expected loss and take no other action"],e:"Knightian uncertainties can still be managed (e.g., avoidance or transfer). Risk managers must never treat unmeasurable risks as if they were a known quantity.",lp:"Confidence in a risk measure should shape how it is used in decisions.",r:"§1.3"},
+{t:"unk",q:"Investors keep buying debt even though compressed yields clearly show risk is being bought too cheaply. Using the Bank of England's risk metaphors, this is best described as a:",o:["Moonwalking bear","Underwater iceberg","Elephant in the room","Known unknown"],e:"Moonwalking bears are risks in plain sight that people fail to notice because their attention is elsewhere. Underwater icebergs (e.g., pre-crisis leverage) are genuinely harder to spot. The elephant is seen by all but politely unspoken.",lp:"Bear = visible but unnoticed. Iceberg = hidden weakness. Elephant = seen by all, unspoken.",r:"Box 1.3"},
+{t:"unk",q:"Which tool can help identify 'unknown unknowns' by finding clusters and correlations without specifying the area of interest in advance?",o:["Unsupervised machine learning","Supervised credit scoring models","Reverse stress testing","Basic risk triage"],e:"Box 1.4 notes that unsupervised machine learning can surface patterns nobody thought to look for. Supervised models need a target defined in advance.",lp:"Unsupervised = no target specified, which is exactly what you need for risks you don't yet know.",r:"Box 1.4"},
+{t:"proc",q:"What is the correct order of the classic risk management process?",o:["Identify → Analyze → Assess impact → Manage","Analyze → Identify → Manage → Assess impact","Identify → Manage → Analyze → Assess impact","Assess impact → Identify → Analyze → Manage"],e:"Identify (name, categorise, understand), analyze (rank, score, measure), assess impact (effects, knock-ons, repercussions), then manage (avoid, retain, mitigate, transfer).",lp:"Mnemonic: I-A-A-M — 'I Am Assessing Management'.",r:"§1.2 Figure 1.4"},
+{t:"proc",q:"A manufacturer stops selling into a country with unstable politics to sidestep political and FX risk. Which risk management choice is this?",o:["Avoid","Retain","Mitigate","Transfer"],e:"Avoidance means sidestepping the risk by discontinuing the business or pursuing it differently.",lp:"Avoid = exit the activity. Mitigate = reduce exposure, frequency or severity while staying in.",r:"§1.2"},
+{t:"proc",q:"A large corporation sets up a captive insurance company to cover its own property losses. This is an example of:",o:["Retaining risk","Transferring risk","Avoiding risk","Mitigating risk"],e:"Captive insurance and self-insurance keep the risk inside the group — the chapter lists them as retention mechanisms, along with risk capital allocation.",lp:"Trap: 'insurance' in the name does not mean transfer. A captive is owned by the firm, so the risk stays.",r:"§1.2"},
+{t:"proc",q:"Which pairing of action and risk management choice is correct?",o:["Taking collateral against a loan — mitigate","Buying a third-party insurance policy — retain","Hedging an unwanted FX exposure — avoid","Allocating risk capital to a desk — transfer"],e:"Collateral reduces severity → mitigate. Insurance → transfer. Hedging FX → mitigate. Risk capital allocation → retain.",lp:"Map each action to what it changes: exposure, frequency or severity (mitigate); who bears it (transfer).",r:"§1.2"},
+{t:"proc",q:"Which statement best describes the relationship between risk management and risk taking?",o:["It cuts value-destroying risk so firms can take more value-creating risk","Risk management aims to remove as much risk as possible from the firm's activities","Risk management and risk taking are separate functions with unrelated objectives","Good risk management always lowers the total amount of risk the firm carries"],e:"Investment in risk management lets farmers grow more food and banks lend more. Success is a platform for greater endeavours, which is why risk never really goes away.",lp:"Risk management is about the right balance between value creation and undue risk — not risk elimination.",r:"§1.2"},
+{t:"proc",q:"A non-financial company reports a large loss from a speculative derivatives position. How are investors most likely to react?",o:["React badly, as the risk is seen as unnatural to the firm","Ignore it, because derivatives losses are routine for most large corporations","React positively, because it shows the firm is actively taking and managing risk","React only if the size of the loss exceeds the firm's regulatory capital buffer"],e:"The identity of a risk matters as much as its size. Manufacturers usually accept operational risks but are expected to avoid or transfer large market or credit risks.",lp:"Ask 'is this risk natural to the business?' — it guides whether to retain or shed it.",r:"§1.2"},
+{t:"typ",q:"An airline hedges its jet fuel costs with crude oil futures. The normal price spread between jet fuel and crude widens. The airline is exposed to:",o:["Basis risk","Counterparty risk","Funding liquidity risk","Specific market risk"],e:"Basis risk arises when a hedge does not move perfectly with the position it is meant to offset.",lp:"For risk managers, mismatched price moves are often a bigger problem than any single exposure.",r:"§1.1 Market risk"},
+{t:"typ",q:"A bank pays its euro leg of an FX trade in the morning, but the counterparty is closed by regulators before paying its USD leg. This is best described as:",o:["Settlement (Herstatt) risk, a form of credit risk","Market liquidity risk, as the FX market seized up","Basis risk between the euro and the dollar legs","Funding liquidity risk at the bank that paid first"],e:"Named after Herstatt bank (1974). It is a counterparty's failure to perform on a market trade — listed under credit risk.",lp:"Herstatt = settlement timing mismatch across currencies and time zones.",r:"§1.1 Credit risk"},
+{t:"typ",q:"Which situation makes a credit portfolio riskier, holding EL constant?",o:["Recoveries tend to fall when defaults rise","Lending is spread across many small loans in different regions","Most loans are heavily collateralised with liquid assets","Borrowers come from many unrelated industries and countries"],e:"The chapter lists three portfolio risk drivers: few large loans; positively correlated defaults; and positive correlation between EAD, PD and LGD (e.g., recoveries fall as defaults rise).",lp:"Correlation between risk factors is what turns ordinary losses into extreme ones.",r:"§1.1 Credit risk"},
+{t:"typ",q:"A bank enters an at-market interest rate swap with zero initial value. Which statement about its credit risk is correct?",o:["Exposure starts near zero but can grow fast as markets move","It has no credit risk at any time, because no principal is exchanged","Its credit exposure is fixed at the swap's full notional amount from day one","Credit risk only becomes relevant on the swap's final maturity date"],e:"Derivatives may have no market value at the outset, so no immediate credit exposure, but exposure can become a major counterparty credit exposure as the position gains in value.",lp:"Loan EAD is usually clear; derivative EAD is volatile.",r:"§1.1 Credit risk"},
+{t:"typ",q:"Which describes the two types of liquidity risk correctly?",o:["Funding: can't meet obligations. Market: can't sell at a fair price in a seized-up market","Funding: the bid-ask spread widens. Market: the bank's maturity mismatch grows","Funding: losses on trading assets. Market: the bank cannot attract new deposits","Funding: affects only banks. Market: affects only non-financial companies"],e:"Funding liquidity risk = cannot access enough cash/liquid assets to meet obligations. Market (trading) liquidity risk = forced to sell at an abnormally low price, or not at all.",lp:"They feed each other: market liquidity risk can become funding liquidity risk overnight for banks reliant on wholesale funding.",r:"§1.1 Liquidity risk"},
+{t:"typ",q:"Why are normal-market measures such as bid-ask spreads and trading volume of limited use for market liquidity risk?",o:["They may not show whether a market stays liquid in a crisis","They cannot be observed at all in over-the-counter markets","They only apply to equity markets, not to bonds or derivatives","Regulators prohibit banks from using them in risk reporting"],e:"Liquidity can vanish exactly when it is needed. Calm-market measures say little about crisis behaviour.",lp:"Liquidity is hardest to measure precisely when it matters most.",r:"§1.1 Liquidity risk"},
+{t:"typ",q:"Under the Basel Committee definition, operational risk includes:",o:["Legal risk","Business risk","Strategic risk","Reputational risk"],e:"Operational risk is loss from inadequate or failed internal processes, people and systems or from external events. It includes legal risk but excludes business, strategic and reputational risk.",lp:"Remember the trio excluded from op risk: Business, Strategic, Reputational.",r:"§1.1 Operational risk"},
+{t:"typ",q:"Which of the following is classified as operational risk?",o:["Cyber risk","Counterparty default risk","Reputational risk","Downgrade risk"],e:"The broad op risk definition covers cyber risk, AML risk, terrorism, rogue trading and data privacy breaches.",lp:"Rogue trading in the 1990s helped persuade regulators to add op risk to bank capital.",r:"§1.1 Operational risk"},
+{t:"typ",q:"How did the Basel Committee change direction on operational risk capital in 2016?",o:["To a simpler standardised approach: bank size × a loss-history multiplier","It required every bank to calculate capital with advanced internal loss models","It removed operational risk from bank capital requirements altogether","It made scorecards and key risk indicators the only approved capital method"],e:"Regulators doubted internal models could support accurate capital allocation. Banks are still encouraged to understand op risk with many tools, but capital is standardised. (Basel III, finalised in 2017, calls this the Standardised Approach: business indicator × internal loss multiplier.)",lp:"Measure vs manage: op risk capital is now simple, but op risk management is still vital.",r:"Box 1.1"},
+{t:"typ",q:"Which describes strategic risk rather than business risk?",o:["Big, long-term decisions on the firm's direction and capital","Day-to-day uncertainty in customer demand and in pricing decisions","The outcome of routine contract negotiations with key suppliers","Managing incremental product innovation within existing lines"],e:"Business risk covers the usual worries: demand, pricing, suppliers, innovation. Strategic risk is about big, long-term directional bets with major investment of capital, people and reputation.",lp:"Strategic = big and long-term. Business = everyday commercial.",r:"§1.1 Business and strategic risk"},
+{t:"typ",q:"Responsibility for business and strategic risk lies with general management. Why should risk managers still be involved?",o:["Business decisions create big exposures in other risk areas","Risk managers hold final authority over the firm's strategy and business plan","Business risk is a sub-type of operational risk owned by the chief risk officer","Regulators require the chief risk officer to set the firm's business strategy"],e:"The chapter gives three reasons: risk appetite must be defined holistically; risk teams can quantify parts of business risk; and business decisions generate exposures elsewhere (e.g., a power station needs an energy price strategy).",lp:"Banks that fail to coordinate business, strategic and risk goals don't survive long.",r:"§1.1 Business and strategic risk"},
+{t:"typ",q:"Which statement about reputation risk is most accurate?",o:["It usually stems from failures elsewhere; the board should watch it","It is easy to quantify precisely with a value-at-risk model","It is the sole responsibility of the chief market risk officer","It cannot be managed at all, so it should simply be accepted"],e:"Credit losses can spark rumours that become fatal; misrepresenting products loses customers; losing a regulator's trust can curtail activities. Banks need plans to reassure markets.",lp:"Reputation risk is usually a consequence — it amplifies failures elsewhere.",r:"§1.1 Reputation risk"},
+{t:"typ",q:"During the 2007–2009 financial crisis, risk flowed from one risk type to another. Which sequence is correct?",o:["Credit risk → liquidity risk → market risk","Market risk → operational risk → credit risk","Operational risk → strategic risk → liquidity risk","Liquidity risk → reputation risk → business risk"],e:"Risk types interact so that risk flows. Within a firm, a fat-finger error (operational) can create a market position (market) and damage standing (reputational).",lp:"Typologies are useful but risks don't stay in their boxes — understand the interactions.",r:"§1.1"},
+{t:"typ",q:"Why do banks generally try to avoid operational risk while actively seeking market and credit risk?",o:["More op risk doesn't bring more reward","Op risk is always larger than credit risk","Regulators ban banks from taking op risk","Op risk can be fully insured away"],e:"Banks treat market and credit risk as a natural part of the business that earns a return. Operational risk carries no matching reward.",lp:"Each risk type needs its own skills and philosophy, starting with 'does this risk pay us?'",r:"§1.1"},
+{t:"typ",q:"Which is the best definition of specific market risk?",o:["An individual asset falls more than its asset class","An entire asset class falls in value together","A hedge offsets the position only imperfectly","A counterparty fails to settle a market trade"],e:"General market risk = the asset class falls. Specific market risk = the individual asset underperforms its class. An imperfect hedge is basis risk.",lp:"Diversification reduces specific risk; it can't remove general market risk.",r:"§1.1 Market risk"},
+{t:"fac",q:"In a commercial real estate downturn, developers' default probability rises while the value of property collateral falls. This combination is called:",o:["Wrong-way risk","Basis risk","Specific market risk","Model risk"],e:"Wrong-way risk occurs when exposure or severity rises at the same time as default probability — e.g., a derivative's value to you rising as the counterparty weakens.",lp:"Look for risk factors that get worse together — that's where extreme losses come from.",r:"§1.4 Risky relationships"},
+{t:"fac",q:"Why did Basel II lead banks to re-engineer their credit rating systems?",o:["To record PD, LGD and exposure as separate risk factors","To replace credit risk measures with operational risk measures","To abolish internal ratings in favour of agency ratings","To compute a daily VaR figure for every loan book"],e:"Breaking risk into discrete factors — and understanding how they interact over time and under stress — greatly increases the predictive power of loss data.",lp:"Risk factor breakdown is building block 4: split risk into drivers, then sub-drivers.",r:"§1.5"},
+{t:"fac",q:"A firm's PD is driven by management quality, which in turn is driven by management's years of experience. Years of experience is best described as a:",o:["Sub-factor of a fundamental risk factor","Key risk indicator for market risk","Component of expected shortfall","Driver of exposure at default"],e:"Each primary risk factor (e.g., PD) is driven by more fundamental factors (financial ratios, sector, management quality), which have their own sub-factors.",lp:"Practical limits on granularity: analytical resources and loss data quality.",r:"§1.5"},
+{t:"hum",q:"Which correctly lists the three lines of defence?",o:["1st business line · 2nd risk management · 3rd internal audit","1st risk management · 2nd business line · 3rd internal audit","1st internal audit · 2nd the board · 3rd external regulators","1st business line · 2nd internal audit · 3rd risk management"],e:"The business generates, owns and manages risk (1st), specialist risk managers provide day-to-day oversight (2nd), and periodic independent assurance such as internal audit checks both (3rd).",lp:"A classic true/false trap swaps lines 1 and 2. The business line is always first.",r:"§1.7"},
+{t:"hum",q:"In many rogue trading cases the trader had previously worked in the middle or back office. Which building block does this illustrate?",o:["Human agency and conflicts of interest","Risk aggregation and its limitations","Structural change in financial markets","Balancing risk and reward through RAROC"],e:"Those who understand how risk is controlled are best placed to game it and often have little incentive to make risk transparent.",lp:"Controls have loopholes and go stale fast; people adapt to them.",r:"§1.7"},
+{t:"agg",q:"Why are option Greeks such as delta of limited use for enterprise-wide risk?",o:["They can't be added up or compared across markets","They are rarely used on options trading desks today","They measure only credit risk, not market risk","They are mathematically identical to 99% VaR"],e:"Greeks are invaluable on an options desk, but delta in FX and delta in commodities are not comparable, so they can't be aggregated firm-wide.",lp:"Exam answer to 'which Greek can be added across currencies?' — none of them.",r:"§1.8"},
+{t:"agg",q:"Why were notional amounts an unsatisfactory measure of market risk?",o:["They ignore volatility differences and offsetting positions","They are too complex to calculate for large trading portfolios","They understate the expected loss on loan portfolios","Regulators have always prohibited their use in risk reports"],e:"USD 20m in Treasuries is not the same risk as USD 20m in a volatile commodity, and hedged derivative books can have huge notional but little net risk.",lp:"Risk measures must reflect volatility and offsets — not size alone.",r:"§1.8"},
+{t:"agg",q:"Which risk type is the most amenable to quantification and aggregation?",o:["Market risk","Operational risk","Reputation risk","Strategic risk"],e:"Market risk has rich price data and established metrics, though even it is hard to control.",lp:"The less data a risk type has, the more judgment its measurement needs.",r:"§1.8"},
+{t:"agg",q:"A bank's loan volume falls, but management loosened credit standards to win back market share. A falling loan-volume metric therefore:",o:["May not mean credit risk is lower","Proves that the bank's credit risk has fallen","Directly measures the bank's expected shortfall","Shows that economic capital must have risen"],e:"A drop in one risk component means less risk only if everything else stays the same. Decision-makers can mistake a proxy for risk itself.",lp:"Risk numbers look hard but are often proxies — know what's driving them.",r:"Box 1.6"},
+{t:"agg",q:"A firm uses staff turnover as an indicator of a type of operational risk. This metric is best described as a:",o:["Key risk indicator with a judgment-based link to the risk","Direct measure of the firm's expected operational loss","Regulatory capital requirement under the Basel rules","Measure of the firm's market liquidity under stress"],e:"KRIs are quantitative measures used to assess potential exposures, but their relationship to the underlying risk is often judgmental.",lp:"Watching a KRI is not the same as watching the risk.",r:"Box 1.6"},
+{t:"rar",q:"A business line earns revenue of USD 30m, has costs of USD 10m, expected losses of USD 5m, a 25% tax rate and economic capital of USD 100m. The shareholders' hurdle rate is 12%. Which statement about the line's RAROC is correct?",o:["RAROC = 11.25%; the line does not add shareholder value","RAROC = 15.00%; the line adds shareholder value","RAROC = 20.00%; the line adds shareholder value","RAROC = 11.25%; the line adds value as RAROC is positive"],e:"After-tax net risk-adjusted return = (30 − 10 − 5) × (1 − 0.25) = 11.25. RAROC = 11.25 / 100 = 11.25%, below the 12% hurdle. 15% forgets tax; 20% forgets both EL and tax.",lp:"RAROC = after-tax net risk-adjusted expected return (net of EL) ÷ economic capital. Value is added only if RAROC > hurdle (cost of equity).",r:"§1.9"},
+{t:"rar",q:"For an activity to add value for shareholders, its RAROC should be:",o:["Higher than the cost of equity capital","Higher than the risk-free interest rate","Higher than zero, i.e., simply positive","Higher than the firm's 99% daily VaR"],e:"The hurdle rate is the minimum return on equity shareholders need to be fairly compensated for risk.",lp:"Positive RAROC ≠ value creation. Compare with the hurdle.",r:"§1.9"},
+{t:"rar",q:"What is the purpose of economic capital?",o:["To absorb unexpected losses","To cover expected losses","To meet regulatory minimums","To fund new business lines"],e:"Economic (risk) capital must be large enough to absorb unexpected losses; EL is covered through pricing.",lp:"Economic capital = the firm's own view; regulatory capital = rules-based. They often differ.",r:"§1.9"},
+{t:"rar",q:"How does economic capital differ from regulatory capital?",o:["Economic: firm's own view of its risks. Regulatory: set by rules","They are always the same number, calculated by the same method","Regulatory covers expected loss; economic covers only tail loss","Economic capital is set directly by the Basel Committee's rules"],e:"Economic capital reflects the firm's own understanding of its economic risks; regulatory capital follows regulatory rules and methodologies. They are sometimes aligned but often differ.",lp:"Know both definitions word-for-word — a favourite short-answer question.",r:"§1.9"},
+{t:"rar",q:"Business A has high EL every year but little UL. Business B has very low EL but suffers very large losses at the end of each cycle. Without risk-adjusted analysis, what tends to happen?",o:["B looks attractive in good times, prices are cut, then losses hit","A looks more attractive, so Business B is wound down early","Both look equally risky because their average losses are similar","B is correctly priced because its expected loss is so low"],e:"Chasing volume in the benign part of the cycle has made bank lending pro-cyclical, amplifying booms and busts across whole economies.",lp:"RAROC charges both EL and the capital cost of UL, exposing Business B's true cost.",r:"§1.9"},
+{t:"rar",q:"A bank compares the cost of an insurance programme with the risk reduction it delivers. Which RAROC application is this?",o:["Risk management cost/benefit analysis","Comparison of business line performance","Pricing strategy for customer segments","Investment analysis of a new credit product"],e:"The four applications: business comparison, investment analysis, pricing strategies, and risk management cost/benefit analysis.",lp:"Practical weakness: RAROC depends on the risk numbers, and business lines often dispute them.",r:"§1.9"},
+{t:"erm",q:"What is the main problem that enterprise risk management (ERM) is designed to overcome?",o:["Siloed risk management by divisions","The lack of a VaR model in each division","High regulatory capital across business lines","Risk committees duplicating each other"],e:"In siloed firms each division manages its exposures independently. ERM builds a broad picture across risk types and business lines, using a clear risk appetite statement and cohesive governance.",lp:"Trap: ERM is firm-wide, not business-unit level.",r:"§1.10"},
+{t:"erm",q:"Which statement best reflects the modern view of enterprise risk management (ERM)?",o:["It links risk information to action, governance and culture","Its goal is to express all of the firm's risk as one economic capital number","It replaces the three lines of defence with a single central risk team","It covers only market and credit risk, leaving the rest to the business"],e:"Historic ERM over-focused on a single number. The crisis showed risk is multi-dimensional, crosses risk types over time, and needs expert judgment plus statistics.",lp:"ERM = full range of tools + many time horizons + people and 'the way we do things'.",r:"§1.10 Figure 1.7"},
+{t:"hist",q:"Which pairing of date and risk management milestone is correct?",o:["1994 — RiskMetrics VaR published; 2004 — Basel II adds op risk capital","1988 — Basel I focuses on market risk; 1996 — Basel II adds credit risk","1973 — Black-Scholes formula; 1988 — Basel I introduces liquidity rules","2002 — Dodd-Frank Act passed; 2010 — Sarbanes-Oxley Act passed"],e:"Basel I (1988) focused on credit risk; the Market Risk Amendment came in 1996; Basel II (2004) added operational risk; Basel III (2010 onwards) added liquidity. SOX was 2002 and Dodd-Frank 2010.",lp:"Basel by risk type: I = credit, 1996 = market, II = operational, III = liquidity.",r:"Figure 1.2"},
+{t:"var",q:"In January 1990 Dennis Weatherstone, CEO of J.P. Morgan, asked for a daily 4:15 p.m. report on the firm's total risk. What was its significance?",o:["It helped drive the development of Value-at-Risk","It introduced expected shortfall as the main metric","It created the three lines of defence at the bank","It led directly to the Basel I Accord on credit risk"],e:"The request for a single daily view of firm-wide risk drove VaR's development; J.P. Morgan published the RiskMetrics methodology in 1993/94.",lp:"4:15 p.m. → VaR → RiskMetrics (1994).",r:"§1.4"},
+{t:"hist",q:"Most risk management disasters are caused by:",o:["Failures in the basic building blocks","Errors in sophisticated models such as VaR","Regulation pushing firms into the same trades","Too few quantitative risk metrics and data"],e:"Centuries-old institutions have failed by ignoring a type of risk, misunderstanding connections between risks, or skipping steps in the classic risk process.",lp:"Master the 10 building blocks — they are the chapter's backbone.",r:"Introduction, Figure 1.1"},
+{t:"hist",q:"Ancient maritime loans tied repayment to the safe arrival of shipments. What did the insurance element become once it was separated from the loan?",o:["It became the first standalone financial risk transfer instrument (14th-century northern Italy)","It became the world's first exchange-traded futures contract, on rice (18th-century Osaka)","It became the first contract of a dedicated reinsurance company (19th-century Cologne)","It became the first recorded life insurance policy, written on a person (16th-century London)"],e:"The insurance contract separated from the loan as early as the 1300s in northern Italy. Osaka rice futures (1730), Cologne Re (1846) and the first London life policy (1583) are other timeline entries.",lp:"Risk management is an old craft but a young science — and an even younger profession.",r:"Introduction, Figure 1.2"},
+{t:"hist",q:"Which was the world's first futures market, an early form of exchange-based risk transfer?",o:["Rice futures in Osaka, Japan (1730)","Lloyd's coffee house in London (1688)","Corn futures on the CBOT (1864)","Currency futures on the CME (1972)"],e:"The timeline lists Japanese rice futures traded in Osaka in 1730 as the world's first futures. The CBOT listed the first US standardised futures (corn) in 1864.",lp:"Exchange-based risk transfer developed through agricultural futures in the 18th and 19th centuries.",r:"Figure 1.2"},
+{t:"hist",q:"Why is human risk awareness not always suited to the modern world?",o:["We over-rely on instinct and experience, and framing skews choices","Modern risks are fully measurable, so human judgment adds no value","People make consistently rational risk choices, which markets exploit","Risk awareness only developed after probability theory in the 1650s"],e:"Behavioural science shows biases skew our thinking, and even the way a decision is framed irrationally affects our willingness to take risk.",lp:"How we think about risk is the biggest determinant of whether we recognise, measure and manage it.",r:"Introduction"},
+{t:"proc",q:"After brainstorming, a risk analyst studies internal and external loss records to gauge the frequency and severity of each risk. Which identification technique is this?",o:["Loss data analysis","Front line observation","Hypothetical what-if analysis","Structured interviews and surveys"],e:"Box 1.2 lists loss data analysis as the step that checks how the industry categorises each risk and how often and how badly losses occur.",lp:"Identification toolkit: brainstorming, interviews/surveys, industry resources, loss data, triage, what-if, front line observation, following the trail.",r:"Box 1.2"},
+{t:"proc",q:"Not every risk can be quantified exactly. At a minimum, basic risk triage requires a risk manager to determine a risk's:",o:["Frequency and severity","Full probability distribution","Economic capital charge","99% VaR and expected shortfall"],e:"Box 1.2: risk managers should be able to determine a given risk's frequency and severity even when exact quantification isn't possible.",lp:"Frequency × severity is the universal first cut for any risk, measurable or not.",r:"Box 1.2"},
+{t:"proc",q:"A bank securitises a pool of mortgages and sells the notes to outside investors. Which risk management choice is this primarily?",o:["Transfer","Retain","Avoid","Mitigate"],e:"Securitisation moves credit risk to third-party investors. The book's own true/false item confirms securitisation is a mechanism to transfer risk to a third party.",lp:"Transfer tools: derivatives, structured products (incl. securitisation), insurance premiums.",r:"§1.2; end-of-chapter Q1.23"},
+{t:"typ",q:"Which of the following is NOT a benefit of a risk typology?",o:["Ensuring that no new types of risk can emerge","Drilling down into each risk type's specific factors","Mapping risk processes so that no gaps are left","Holding staff accountable for specific risk domains"],e:"Typologies must stay flexible precisely because new risks keep emerging — e.g., rogue trading in the 1990s and, more recently, cyber and data privacy risk.",lp:"New risks are born from changes in market and industry practice. Update the typology.",r:"§1.1"},
+{t:"typ",q:"Banks borrow short (deposits) and lend long. Which techniques are used in asset/liability management (ALM) to manage this funding mismatch?",o:["Gap and duration analyses","Delta and theta analyses","Expected shortfall and EVT","RAROC and hurdle rates"],e:"Sound ALM lies at the heart of banking; the chapter cites gap and duration analyses. Many banks that failed in 2007–2009 had large maturity mismatches.",lp:"Funding liquidity risk in banks = maturity mismatch + dependence on wholesale funding confidence.",r:"§1.1 Liquidity risk"},
+{t:"typ",q:"An equity fund designed to track a benchmark index fails to match it exactly. This is best classified as:",o:["A form of market risk arising from relationships between positions","Credit risk, because the index provider may fail to perform","Funding liquidity risk, caused by investor redemptions","Downgrade risk on the constituents of the benchmark"],e:"Market risk can be managed through relationships between positions, but it also arises from them — imperfect tracking and imperfect hedging (basis risk) are examples.",lp:"Mismatched price movements are often a bigger problem than any single exposure.",r:"§1.1 Market risk"},
+{t:"typ",q:"Which statement about business and strategic risk is correct?",o:["They matter to financial firms as well as non-financial firms","They apply only to large non-financial corporations, never to banks","They are a sub-category of operational risk under the Basel definition","They are owned by the chief risk officer, not by general management"],e:"They consume much management attention in non-financial firms but are also a key concern in financial firms. Op risk explicitly excludes them, and general management owns them.",lp:"End-of-chapter trap: 'Business risk applies only to large non-financial corporates' is FALSE.",r:"§1.1; end-of-chapter Q1.24"},
+{t:"hum",q:"Why do the people who best understand how a risk is generated often have the least incentive to make it transparent?",o:["Revealing potential tail losses could curb their activity and rewards","They lack the technical skills needed to measure the risks they run","Regulations prohibit front-office staff from reporting their risks","Risk transparency is solely the responsibility of internal audit"],e:"The chapter asks why risk takers would broadcast the potential for unexpected or tail losses. This conflict of interest is one reason firms use three lines of defence.",lp:"Those who understand a risk best are best placed to game it.",r:"§1.7"},
+{t:"hum",q:"What makes human systems such as financial markets harder to model than natural systems?",o:["Participants react to change, including gaming new rules","They follow fixed physical laws that change only slowly over time","Their data are always too scarce for any statistical analysis","They are unaffected by regulation or product innovation"],e:"Traders second-guess each other's predictions; a regulator who drafted a reform may later advise the industry on circumventing it. Human systems also face constant structural change.",lp:"Markets are reflexive: measuring and regulating risk changes behaviour.",r:"§1.6–1.7"},
+{t:"fac",q:"Why do commercial real estate (CRE) markets tend to produce boom-bust cycles?",o:["Supply is inelastic, so prices overshoot, lenders relax standards, and oversupply follows","Supply is perfectly elastic, so prices barely move and lenders never lose money","Lenders tighten loan-to-value ratios in booms, which starves the market of credit","Collateral values rise whenever defaults rise, cushioning lenders in the downturn"],e:"Construction takes time, prices rise, lenders relax LTVs to win share; later oversupply and a weaker economy cut prices, credit is withdrawn, collateral falls and fire sales create a feedback loop.",lp:"CRE is the chapter's clearest example of risk factors (PD up, collateral down) acting together.",r:"§1.4 Risky relationships"},
+{t:"erm",q:"According to a 2017 McKinsey/IIF survey, the digital transformation of risk functions in financial institutions is:",o:["Slower than customer-facing operations, held back by legacy systems, data and skills","Faster than customer-facing operations, because risk data are already standardised","Largely complete at most large banks, with automated workflows fully in place","Driven mainly by regulators that now require AI models for capital calculation"],e:"Changes under way include wider data sources and advanced analytics, faster automated decisions (e.g., credit scoring) and paperless workflows. Data scientists may become as sought-after as 'rocket scientist' modellers.",lp:"Digital risk management = more data, faster automated decisions, fewer manual processes.",r:"Box 1.7"},
+{t:"erm",q:"What is perhaps the biggest lesson of the 2007–2009 financial crisis for risk management?",o:["Risk cannot be reduced to any single number","VaR should be replaced by expected shortfall","Operational risk is the largest risk banks face","Liquidity risk can be fully hedged with derivatives"],e:"Risk is multi-dimensional, develops and crosses risk types over time, and demands expert judgment combined with statistics. Firms need a 360-degree view built with many tools and curiosity.",lp:"No single metric — VaR, ES or economic capital — gives the full picture.",r:"§1.10"}
+];
+
+
+const KEY="frm1-ch1-v1";
+let S={seen:{},sessions:[],run:null};
+try{const raw=localStorage.getItem(KEY);if(raw)S=Object.assign(S,JSON.parse(raw))}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+Q.forEach((q,i)=>q.id=i);
+const app=document.getElementById("app");
+const L="ABCD";
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+let run=null;
+
+const mastered=()=>Q.filter(q=>S.seen[q.id]&&S.seen[q.id].last===1).length;
+const missedIds=()=>Q.filter(q=>S.seen[q.id]&&S.seen[q.id].last===0).map(q=>q.id);
+const unseenIds=()=>Q.filter(q=>!S.seen[q.id]).map(q=>q.id);
+const EXAM_PACE=2.4; // FRM Part I: 100 questions in 4 hours
+const fmt=ms=>{const s=Math.round(ms/1000),m=Math.floor(s/60);return m+":"+String(s%60).padStart(2,"0")};
+const persist=()=>{S.run=run&&run.res.filter(r=>r===0||r===1).length<run.ids.length?{ids:run.ids,i:run.i,res:run.res,pick:run.pick,label:run.label,el:run.el+(Date.now()-run.t0)}:null;save()};
+
+function home(){
+  run=null;
+  const m=mastered(),pct=Math.round(m/Q.length*100),miss=missedIds().length,un=unseenIds().length;
+  const last=S.sessions[S.sessions.length-1];
+  const sv=S.run&&Array.isArray(S.run.ids)&&S.run.ids.length&&S.run.ids.every(id=>Q[id])?S.run:null;
+  const ticks=Q.map(q=>{const s=S.seen[q.id];return `<i class="${s?(s.last?"ok":"bad"):""}"></i>`}).join("");
+  const counts={};Q.forEach(q=>counts[q.t]=(counts[q.t]||0)+1);
+  const sheet=Object.keys(T).map(k=>`<h3>${T[k]}</h3><ul>${Q.filter(q=>q.t===k).map(q=>`<li>${esc(q.lp)}</li>`).join("")}</ul>`).join("");
+  app.innerHTML=`
+  <h1>Building Blocks of Risk Management</h1>
+  <p class="sub">FRM Part I · Foundations · Chapter 1 practice — ${Q.length} exam-style questions with a learning point after every answer.</p>
+  <div class="gauge">
+    <div class="read"><div class="big">${pct}%</div><span>mastered · ${m} of ${Q.length} questions right on your last try</span></div>
+    <div class="scale"><div class="ticks">${ticks}</div><div class="ptr" style="left:${pct}%"></div></div>
+    <div class="ends"><span>0</span><span>${last?`Last session ${last.s}/${last.n} · ${last.d}`:"No sessions yet"}</span><span>${Q.length}</span></div>
+  </div>
+  <div class="modes">
+    ${sv?`<button class="mode pri" data-m="resume"><span><b>Resume ${esc(sv.label)}</b><small>Question ${Math.min((sv.res||[]).filter(r=>r===0||r===1).length+1,sv.ids.length)} of ${sv.ids.length} · ${(sv.res||[]).filter(Boolean).length} correct so far</small></span><span class="arrow">→</span></button>`:""}
+    <button class="mode ${sv?"":"pri"}" data-m="quick"><span><b>Quick 10</b><small>Random mix, unseen and missed first · about 15 min</small></span><span class="arrow">→</span></button>
+    <button class="mode" data-m="miss" ${miss?"":"disabled"}><span><b>Review missed</b><small>${miss?`${miss} question${miss>1?"s":""} you got wrong last time`:"Nothing to review yet"}</small></span><span class="arrow">→</span></button>
+    <button class="mode" data-m="full"><span><b>Full mock</b><small>All ${Q.length} questions shuffled · about ${Math.round(Q.length*1.5/5)*5} min${un?` · ${un} unseen`:""}</small></span><span class="arrow">→</span></button>
+  </div>
+  <a class="mode" style="text-decoration:none;color:inherit;margin-top:10px" href="https://claude.ai/artifact/U1Q5NizPuCDLPJPkTPJwts" target="_blank" rel="noopener"><span><b>Study cards first</b><small>42 key points, one at a time, with diagrams and exam tips</small></span><span class="arrow">↗</span></a>
+  <h2>Practise one topic</h2>
+  <div class="chips">${Object.keys(T).map(k=>`<button class="chip" data-t="${k}">${T[k]}<em>${counts[k]||0}</em></button>`).join("")}</div>
+  <h2>Revise</h2>
+  <details><summary>The 10 building blocks</summary><div class="in"><ol>
+  <li>The risk management process</li><li>Identifying risk: knowns and unknowns</li><li>Expected loss, unexpected loss and tail loss</li><li>Risk factor breakdown</li><li>Structural change: from tail risk to systemic crisis</li><li>Human agency and conflicts of interest</li><li>Typology of risks and risk interactions</li><li>Risk aggregation</li><li>Balancing risk and reward</li><li>Enterprise risk management (ERM)</li></ol></div></details>
+  <details><summary>Formulas and must-know lists</summary><div class="in"><ul>
+  <li><b>EL = EAD × LGD × PD</b>, with LGD = 1 − recovery rate</li>
+  <li><b>RAROC</b> = after-tax net risk-adjusted expected return (net of EL) ÷ economic capital. Adds value only if RAROC &gt; hurdle rate (cost of equity)</li>
+  <li>Process: Identify → Analyze → Assess impact → Manage</li>
+  <li>Choices: Avoid · Retain · Mitigate · Transfer</li>
+  <li>Op risk includes legal; excludes business, strategic, reputational</li>
+  <li>Lines of defence: business line → risk management → internal audit</li>
+  <li>EL → pricing; UL → economic capital; tail → ES, stress tests, EVT</li>
+  <li>Knight = measurable risk vs unmeasurable uncertainty; Rumsfeld = known and unknown unknowns</li>
+  <li>Basel I 1988 credit · 1996 market amendment · Basel II 2004 op risk · Basel III 2010+ liquidity</li></ul></div></details>
+  <details><summary>All ${Q.length} learning points (revision sheet)</summary><div class="in sheet">${sheet}</div></details>
+  <p class="note">Questions are written in the FRM style from GARP's Foundations of Risk Management book (Chapter 1) and the 2026 FRM learning objectives. They are practice items, not real exam questions. Progress is saved in this browser only.</p>
+  <button class="reset" id="reset">Reset my progress</button>`;
+  app.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>b.dataset.m==="resume"?resume(sv):start(b.dataset.m));
+  app.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>start("topic",b.dataset.t));
+  const r=document.getElementById("reset");
+  r.onclick=()=>{if(r.dataset.c){S={seen:{},sessions:[],run:null};save();home()}else{r.dataset.c=1;r.textContent="Tap again to confirm reset"}};
+  window.scrollTo(0,0);
+}
+
+function begin(ids,label){run={ids,i:0,res:[],pick:[],label,t0:Date.now(),el:0};persist();show()}
+function resume(sv){run={ids:sv.ids,i:sv.i,res:sv.res||[],pick:sv.pick||[],label:sv.label,t0:Date.now(),el:sv.el||0};if((run.res[run.i]===0||run.res[run.i]===1)&&run.i<run.ids.length-1)run.i++;show()}
+
+function start(mode,topic){
+  let ids;
+  if(mode==="quick"){const pri=shuf([...missedIds(),...unseenIds()]);const rest=shuf(Q.map(q=>q.id).filter(i=>!pri.includes(i)));ids=shuf([...pri,...rest].slice(0,10))}
+  else if(mode==="miss")ids=shuf(missedIds());
+  else if(mode==="topic")ids=shuf(Q.filter(q=>q.t===topic).map(q=>q.id));
+  else ids=shuf(Q.map(q=>q.id));
+  begin(ids,mode==="topic"?T[topic]:{quick:"Quick 10",miss:"Review missed",full:"Full mock"}[mode]);
+}
+
+function topHTML(){
+  const n=run.ids.length,right=run.res.filter(Boolean).length;
+  const ticks=run.ids.map((id,k)=>{const r=run.res[k];return `<i class="${r===undefined||r===null?(k===run.i?"cur":""):(r?"ok":"bad")}"></i>`}).join("");
+  return `<div class="top"><div class="topr"><span>${esc(run.label)} · ${run.i+1} of ${n} · ${right} correct</span><button class="quit" id="quit">Exit</button></div><div class="scale" style="height:30px;margin-top:6px"><div class="ticks" style="bottom:10px">${ticks}</div><div class="ptr" style="left:${(run.i+.5)/n*100}%"></div></div></div>`;
+}
+function bindQuit(){document.getElementById("quit").onclick=()=>run.res.some(r=>r===0||r===1)?finish():(S.run=null,save(),home())}
+
+function show(){
+  const q=Q[run.ids[run.i]];
+  run.cur=shuf(q.o.map((t,k)=>({t,c:k===0})));
+  app.innerHTML=`${topHTML()}
+  <span class="tag">${T[q.t]}</span>
+  <p class="q">${esc(q.q)}</p>
+  <div class="opts">${run.cur.map((o,k)=>`<button class="opt" data-k="${k}"><span class="l">${L[k]}</span><span>${esc(o.t)}</span></button>`).join("")}</div>
+  <p class="kbd">Keys: A–D or 1–4 to answer · Enter for next</p>
+  <div class="fb" id="fb"></div>`;
+  bindQuit();
+  app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>answer(+b.dataset.k));
+  window.scrollTo(0,0);
+}
+const answered=()=>run.res[run.i]===0||run.res[run.i]===1;
+
+function answer(k){
+  if(!run||answered())return;
+  const q=Q[run.ids[run.i]],ok=run.cur[k].c;
+  run.res[run.i]=ok?1:0;run.pick[run.i]=run.cur[k].t;
+  const s=S.seen[q.id]||{n:0,c:0};s.n++;if(ok)s.c++;s.last=ok?1:0;S.seen[q.id]=s;persist();
+  const ci=run.cur.findIndex(o=>o.c);
+  app.querySelectorAll(".opt").forEach((b,j)=>{b.disabled=true;b.classList.add(j===ci?"ok":j===k?"bad":"dim")});
+  const lastQ=run.i===run.ids.length-1;
+  const fb=document.getElementById("fb");
+  fb.innerHTML=`
+  <p class="verdict ${ok?"ok":"bad"}">${ok?"Correct":"Not quite — the answer is "+L[ci]}</p>
+  <div class="why"><p>${esc(q.e)}</p></div>
+  <div class="lp"><h3>Learning point</h3><p>${esc(q.lp)}</p></div>
+  <p class="ref">Book reference: ${esc(q.r)}</p>
+  <button class="next" id="next">${lastQ?"See results":"Next question"}</button>`;
+  fb.classList.add("on");
+  document.querySelector(".top").outerHTML=topHTML();bindQuit();
+  document.getElementById("next").onclick=next;
+  setTimeout(()=>fb.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth",block:"start"}),60);
+}
+function next(){if(!run||!answered())return;if(run.i===run.ids.length-1)finish();else{run.i++;persist();show()}}
+
+document.addEventListener("keydown",e=>{
+  if(!run||e.metaKey||e.ctrlKey||e.altKey)return;
+  const k=e.key.toLowerCase();let idx="abcd".indexOf(k);if(idx<0)idx="1234".indexOf(k);
+  if(idx>-1&&!answered()&&run.cur&&run.cur[idx]){e.preventDefault();answer(idx)}
+  else if((k==="enter"||k==="arrowright")&&answered()&&!(e.target.tagName==="BUTTON"&&k==="enter")){e.preventDefault();next()}
+});
+
+function finish(){
+  const idx=run.ids.map((id,k)=>k).filter(k=>run.res[k]===0||run.res[k]===1);
+  const done=idx.length,sc=idx.filter(k=>run.res[k]).length,pct=done?Math.round(sc/done*100):0;
+  const el=run.el+(Date.now()-run.t0),per=done?el/done/60000:0;
+  if(done){S.sessions.push({d:new Date().toLocaleDateString(undefined,{day:"numeric",month:"short"}),s:sc,n:done});S.sessions=S.sessions.slice(-30)}
+  S.run=null;save();
+  const by={};idx.forEach(k=>{const t=Q[run.ids[k]].t;by[t]=by[t]||[0,0];by[t][1]++;if(run.res[k])by[t][0]++});
+  const wrongK=idx.filter(k=>!run.res[k]);
+  const verdict=pct>=70?"Strong on this set — keep it fresh with Quick 10 every few days.":pct>=50?"Close. Read the learning points below, then retry the misses.":"Worth re-reading the sections flagged below before your next attempt.";
+  const paceMsg=per<=EXAM_PACE?"you're within it":"you're slower";
+  app.innerHTML=`
+  <h1>${sc} of ${done} correct</h1>
+  <p class="sub">${esc(run.label)} · ${verdict}</p>
+  <div class="gauge"><div class="read"><div class="big">${pct}%</div><span>this session · GARP doesn't publish a pass mark, so aim for 70%+ in practice</span></div>
+  <div class="scale"><div class="ticks">${idx.map(k=>`<i class="${run.res[k]?"ok":"bad"}"></i>`).join("")}</div><div class="ptr" style="left:${pct}%"></div></div>
+  <div class="ends"><span>0%</span><span>100%</span></div>
+  <div class="pace"><div><b>${fmt(el)}</b><span>total time</span></div><div><b>${per.toFixed(1)} min</b><span>per question</span></div><div><b>${EXAM_PACE} min</b><span>exam pace · ${paceMsg}</span></div></div></div>
+  <h2>By topic</h2>
+  <div class="rows">${Object.keys(by).map(t=>{const [c,n]=by[t];return `<div class="row"><div>${T[t]}<div class="bar"><i style="width:${c/n*100}%"></i></div></div><span class="n">${c}/${n}</span></div>`}).join("")}</div>
+  ${wrongK.length?`<h2>Learning points to revisit</h2>${wrongK.map(k=>{const q=Q[run.ids[k]];return `<div class="miss"><p>${esc(q.q)}</p>${run.pick[k]?`<p class="you">You chose: ${esc(run.pick[k])}</p>`:""}<p class="a">Answer: ${esc(q.o[0])}</p><p>${esc(q.lp)}</p><p class="ref">${esc(q.r)}</p></div>`}).join("")}`:""}
+  <div class="modes">
+    ${wrongK.length?`<button class="mode pri" id="retry"><span><b>Retry these ${wrongK.length}</b><small>Locks in the learning while it's fresh</small></span><span class="arrow">→</span></button>`:""}
+    <button class="mode ${wrongK.length?"":"pri"}" id="home"><span><b>Back to start</b><small>Pick another mode or topic</small></span><span class="arrow">→</span></button>
+  </div>`;
+  const wrongIds=wrongK.map(k=>run.ids[k]);
+  run=null;
+  document.getElementById("home").onclick=home;
+  const rt=document.getElementById("retry");
+  if(rt)rt.onclick=()=>begin(shuf(wrongIds),"Retry missed");
+  window.scrollTo(0,0);
+}
+home();
+}
+</script>
+</body>
+</html>

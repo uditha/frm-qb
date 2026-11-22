@@ -1,0 +1,136 @@
+{
+  "id": "valuation",
+  "title": "Valuation and Risk Models",
+  "examWeight": "30%",
+  "blurb": "Market risk, credit risk, and the pricing models behind them.",
+  "lessons": [
+    {
+      "id": "financial-risk",
+      "title": "Measures of Financial Risk",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "var",
+      "title": "Calculating and Applying VaR",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "volatility",
+      "title": "Measuring and Monitoring Volatility",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "credit-ratings",
+      "title": "External and Internal Credit Ratings",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "country-risk",
+      "title": "Country Risk",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "credit-risk",
+      "title": "Measuring Credit Risk",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "operational-risk",
+      "title": "Operational Risk",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "stress-testing",
+      "title": "Stress Testing",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "discounting",
+      "title": "Pricing Conventions, Discounting, and Arbitrage",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "interest-rates",
+      "title": "Interest Rates",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "bond-yields",
+      "title": "Bond Yields and Return Calculations",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "duration",
+      "title": "Duration, Convexity, and DV01",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "term-structure",
+      "title": "Non-Parallel Term Structure Shifts and Hedging",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "binomial-trees",
+      "title": "Binomial Trees",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "black-scholes",
+      "title": "The Black-Scholes-Merton Model",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    },
+    {
+      "id": "greeks",
+      "title": "Option Sensitivity Measures: The Greeks",
+      "summary": "Add questions for this lesson in the subject JSON when you are ready.",
+      "topics": [],
+      "revision": [],
+      "questions": []
+    }
+  ]
+}
