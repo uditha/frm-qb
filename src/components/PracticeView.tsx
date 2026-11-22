@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { findQuestion, getLesson, getSubject, topicTitle } from "@/lib/content";
+import { learnHref } from "@/components/LearnView";
 import {
   answeredCount,
   consumeStart,
@@ -30,7 +31,7 @@ type Finished = {
   answered: number;
   ms: number;
   topics: { title: string; correct: number; total: number }[];
-  missed: { prompt: string; pick: string | null; answer: string; learningPoint: string; reference: string }[];
+  missed: { questionId: string; topicId: string; prompt: string; pick: string | null; answer: string; learningPoint: string; reference: string }[];
   missedIds: string[];
 };
 
@@ -259,7 +260,7 @@ export function PracticeView({ subjectId, lessonId }: { subjectId: string; lesso
   }
 
   if (finished) {
-    return <Results subject={subject} finished={finished} onRetry={retry} />;
+    return <Results subject={subject} lesson={lesson} finished={finished} onRetry={retry} />;
   }
 
   const active = playing && store.run && runMatchesLesson(store.run, subjectId, lesson) ? store.run : null;
@@ -268,6 +269,7 @@ export function PracticeView({ subjectId, lessonId }: { subjectId: string; lesso
     if (!question) return null;
     return (
       <Question
+        subject={subject}
         run={active}
         question={question}
         lesson={lesson}
@@ -314,6 +316,8 @@ function summarize(run: Run, lesson: Lesson): Finished {
     if (result === 0) {
       missedQuestionIds.push(id);
       missed.push({
+        questionId: question.id,
+        topicId: question.topic,
         prompt: question.prompt,
         pick: run.picks[index],
         answer: question.choices[question.answer] ?? "",
@@ -407,9 +411,12 @@ function Setup({
           <h2>Practice one topic</h2>
           <div className="chips">
             {lesson.topics.filter((topic) => counts.get(topic.id)).map((topic) => (
-              <button key={topic.id} className="chip" type="button" onClick={() => onStart("topic", topic.id)}>
-                {topic.title}<em>{counts.get(topic.id)}</em>
-              </button>
+              <span key={topic.id} style={{ display: "inline-flex", gap: 8 }}>
+                <button className="chip" type="button" onClick={() => onStart("topic", topic.id)}>
+                  {topic.title}<em>{counts.get(topic.id)}</em>
+                </button>
+                <Link className="chip" href={learnHref(subject.id, lesson.id, topic.id)}>Learn</Link>
+              </span>
             ))}
           </div>
         </>
@@ -441,6 +448,7 @@ function Setup({
 }
 
 function Question({
+  subject,
   run,
   question,
   lesson,
@@ -448,6 +456,7 @@ function Question({
   onNext,
   onExit,
 }: {
+  subject: Subject;
   run: Run;
   question: Question;
   lesson: Lesson;
@@ -514,6 +523,7 @@ function Question({
           <div className="why"><p>{question.explanation}</p></div>
           <div className="lp"><h3>Learning point</h3><p>{question.learningPoint}</p></div>
           <p className="ref">Book reference: {question.reference}</p>
+          <Link className="more" href={learnHref(subject.id, lesson.id, question.topic, question.id)}>Learn this topic in detail</Link>
           <button className="next" type="button" onClick={onNext}>{last ? "See results" : "Next question"}</button>
         </div>
       ) : null}
@@ -523,10 +533,12 @@ function Question({
 
 function Results({
   subject,
+  lesson,
   finished,
   onRetry,
 }: {
   subject: Subject;
+  lesson: Lesson;
   finished: Finished;
   onRetry: (ids: string[]) => void;
 }) {
@@ -574,6 +586,7 @@ function Results({
               <p className="a">Answer: {item.answer}</p>
               <p>{item.learningPoint}</p>
               <p className="ref">{item.reference}</p>
+              <Link className="more" href={learnHref(subject.id, lesson.id, item.topicId, item.questionId)}>Learn this in detail</Link>
             </div>
           ))}
         </>

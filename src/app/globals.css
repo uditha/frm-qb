@@ -166,6 +166,30 @@ h2 { font-size: 20px; line-height: 1.25; margin: 28px 0 10px; }
   font-size: 15px;
 }
 .chip em { font-style: normal; color: var(--mute); margin-left: 4px; font-size: 13px; }
+a.chip { text-decoration: none; display: inline-flex; align-items: center; }
+.study summary { display: flex; gap: 10px; align-items: flex-start; }
+.study-n {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  font-size: 14px;
+}
+.study .q { margin-top: 4px; }
+.study .a { color: var(--ok); font-weight: 600; margin: 0 0 10px; }
+.more {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 8px;
+  color: var(--acc);
+  font-weight: 600;
+  text-decoration: none;
+}
 
 details {
   background: var(--panel);
