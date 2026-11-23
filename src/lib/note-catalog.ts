@@ -35,10 +35,17 @@ export function notesForLesson(subjectId: string, lessonId: string) {
   return noteChapters.find((chapter) => chapter.subjectId === subjectId && chapter.lessonId === lessonId);
 }
 
+export function notesOutlineHref(subjectId: string, lessonId: string) {
+  return `/learn/${subjectId}/${lessonId}/notes`;
+}
+
+export function sectionHref(subjectId: string, lessonId: string, sectionId: string) {
+  return `/learn/${subjectId}/${lessonId}/notes/${sectionId}`;
+}
+
 export function notesHref(subjectId: string, lessonId: string, topicId?: string) {
   const chapter = notesForLesson(subjectId, lessonId);
   if (!chapter) return null;
   const section = topicId ? chapter.sections.find((item) => item.topics.includes(topicId)) : undefined;
-  const path = `/learn/${subjectId}/${lessonId}/notes`;
-  return section ? `${path}#${section.id}` : path;
+  return section ? sectionHref(subjectId, lessonId, section.id) : notesOutlineHref(subjectId, lessonId);
 }

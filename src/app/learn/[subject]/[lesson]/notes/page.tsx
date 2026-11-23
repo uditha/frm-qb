@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { NotesArticle } from "@/components/NotesArticle";
+import { NotesOutline } from "@/components/NotesOutline";
 import { getLesson, getSubject } from "@/lib/content";
-import { readLessonNotes } from "@/lib/notes";
+import { notesForLesson } from "@/lib/note-catalog";
 
 export async function generateMetadata({
   params,
@@ -10,7 +10,8 @@ export async function generateMetadata({
   params: Promise<{ subject: string; lesson: string }>;
 }): Promise<Metadata> {
   const { subject: subjectId, lesson: lessonId } = await params;
-  const lesson = getSubject(subjectId) && getLesson(getSubject(subjectId)!, lessonId);
+  const subject = getSubject(subjectId);
+  const lesson = subject && getLesson(subject, lessonId);
   return { title: lesson ? `${lesson.title} notes` : "Notes" };
 }
 
@@ -22,15 +23,7 @@ export default async function Page({
   const { subject: subjectId, lesson: lessonId } = await params;
   const subject = getSubject(subjectId);
   const lesson = subject && getLesson(subject, lessonId);
-  const sections = readLessonNotes(subjectId, lessonId);
-  if (!subject || !lesson || !sections) notFound();
-  return (
-    <NotesArticle
-      subjectId={subject.id}
-      lessonId={lesson.id}
-      subjectTitle={subject.title}
-      lessonTitle={lesson.title}
-      sections={sections}
-    />
-  );
+  const chapter = notesForLesson(subjectId, lessonId);
+  if (!subject || !lesson || !chapter) notFound();
+  return <NotesOutline chapter={chapter} lessonTitle={lesson.title} />;
 }

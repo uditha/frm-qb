@@ -44,7 +44,7 @@ export function LearnView({
         {notes.length} points in {subject.title}. Open one when you want the full explanation. Each note includes the correct answer, so use this to study, then go back and test yourself.
       </p>
       {notesHref(subject.id, lesson.id, topicId) ? (
-        <p><Link className="more" href={notesHref(subject.id, lesson.id, topicId)!}>Read the full chapter notes</Link></p>
+        <p><Link className="more" href={notesHref(subject.id, lesson.id, topicId)!}>Read this short lesson</Link></p>
       ) : null}
       {notes.map((question, index) => (
         <details key={question.id} id={question.id} className="study">
