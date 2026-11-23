@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { findQuestion, getLesson, getSubject, topicTitle } from "@/lib/content";
 import { learnHref } from "@/components/LearnView";
+import { notesHref } from "@/lib/note-catalog";
 import {
   answeredCount,
   consumeStart,
@@ -374,6 +375,15 @@ function Setup({
     <>
       <h1>{lesson.title}</h1>
       <p className="sub">{subject.title} · {ids.length} questions{unseen.length ? ` · ${unseen.length} unseen` : ""}.</p>
+      {notesHref(subject.id, lesson.id) ? (
+        <Link className="card" href={notesHref(subject.id, lesson.id)!} style={{ marginBottom: 14 }}>
+          <span>
+            <b>Read the chapter notes</b>
+            <small>Sections, formulas, and worked examples</small>
+          </span>
+          <span className="arrow">→</span>
+        </Link>
+      ) : null}
       <div className="stack">
         {saved ? (
           <button className="mode pri" type="button" onClick={onResume}>

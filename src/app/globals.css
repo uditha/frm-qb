@@ -190,6 +190,35 @@ a.chip { text-decoration: none; display: inline-flex; align-items: center; }
   font-weight: 600;
   text-decoration: none;
 }
+.toc { position: sticky; top: 52px; z-index: 4; background: var(--bg); padding: 8px 0 10px; }
+.notes {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 4px 16px 18px;
+  margin-top: 14px;
+}
+.notes h1 { font-size: 26px; margin: 18px 0 8px; }
+.notes h2 { font-size: 18px; margin: 22px 0 8px; }
+.notes h3 { font-size: 16px; margin: 16px 0 6px; }
+.notes p, .notes li { font-size: 16px; }
+.notes ul, .notes ol { margin: 8px 0 12px; padding-left: 20px; }
+.notes li { margin: 4px 0; }
+.notes blockquote {
+  margin: 12px 0;
+  padding: 12px 14px;
+  background: var(--lp);
+  border-radius: 12px;
+}
+.notes blockquote p { margin: 0; }
+.notes hr { border: 0; border-top: 1px solid var(--line); margin: 18px 0; }
+.table-scroll { overflow-x: auto; margin: 12px 0; }
+.notes table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.notes th, .notes td { border-bottom: 1px solid var(--line); text-align: left; padding: 8px 6px; vertical-align: top; }
+.notes th { color: var(--mute); font-weight: 600; }
+.notes code { font-size: 0.92em; }
+.notes pre { overflow-x: auto; background: var(--bg); padding: 12px; border-radius: 12px; }
+.notes a { color: var(--acc); }
 
 details {
   background: var(--panel);
